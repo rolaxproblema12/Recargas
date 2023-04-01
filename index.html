@@ -494,18 +494,16 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
       </div>
       <div class="modal-body">
-        <form class="form-row mb-4 mb-sm-2" method="post">
+        <form class="form-row mb-4 mb-sm-2">
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="form-group">
-              <select class="custom-select" required="">
+              <select id="operadora" class="custom-select" required="">
                 <option value="">Seleccionar compañia</option>
-                <option>1st Operator</option>
-                <option>2nd Operator</option>
-                <option>3rd Operator</option>
-                <option>4th Operator</option>
-                <option>5th Operator</option>
-                <option>6th Operator</option>
-                <option>7th Operator</option>
+                <option value="Telcel">Telcel</option>
+                <option value="Movistar">Movistar</option>
+                <option value="Iusacell">Iusacell</option>
+                <option value="Unefon">Unefon</option>
+                <option value="Nextel - ATT">Nextel - ATT</option>
               </select>
             </div>
           </div>
@@ -537,14 +535,24 @@
               </select>
             </div>
           </div>
+          <!-- 
           <div class="col-12 col-sm-6 col-lg-3">
-            <button class="btn btn-primary btn-block" type="submit">View Plans</button>
+            <button class="btn btn-primary btn-block" type="submit" id="btnVerPlanes">View Plans</button>
+          </div>
+          -->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <button class="btn btn-primary btn-block" id="btnVerPlanes">View Plans</button>
           </div>
         </form>
+        
+
         <div class="plans">
           <div class="table-responsive-md">
             <table class="table table-hover border">
-              <tbody>
+              <tbody id="contenedor-planes">
+                <!--
+
+                
                 <tr>
                   <td class="text-5 text-primary text-center align-middle">$10 <span class="text-1 text-muted d-block">Amount</span></td>
                   <td class="text-3 text-center align-middle">8 <span class="text-1 text-muted d-block">Talktime</span></td>
@@ -631,6 +639,7 @@
                   <td class="text-1 text-muted align-middle">Full Talktime + 100 SMS per day for 90 days.</td>
                   <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap" type="submit">Recharge Now</button></td>
                 </tr>
+                -->
               </tbody>
             </table>
           </div>
@@ -710,6 +719,6 @@
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="vendor/owl.carousel/owl.carousel.min.js"></script> 
 <script src="js/theme.js"></script> 
-
+<script src="js/Rcarga.js"></script>
 </body>
 </html>

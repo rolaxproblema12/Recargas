@@ -14,9 +14,29 @@ const ejecutartranssacion="https://app.sivetel.com/ApiWS/procesarTransaccion";
 const consultarTransaccion= "https://app.sivetel.com/Api/consultarTransaccion";
 
 async function obtenerProductos (){
-    const respuesta = await fetch(urlProdcuto,options)
-    const datos = await respuesta.json();
+    let filtro = document.getElementById('operadora');
+    console.log(filtro)
+    const respuesta = await fetch(urlProducto,options)
+    const datos = await respuesta.json()
+    
+    let productos = '';
+    datos.data.forEach(producto => {
+        productos += `
+            <tr>
+                <td class="text-5 text-primary text-center align-middle">${producto.monto} <span class="text-1 text-muted d-block">Amount</span></td>
+                <td class="text-3 text-center align-middle">${producto.nombre}<span class="text-1 text-muted d-block">Nombre</span></td>
+                <td class="text-3 text-center align-middle">${producto.codigo}<span class="text-1 text-muted d-block">Codigo</span></td>
+                <td class="text-1 text-muted align-middle">${producto.descripcion}</td>
+                <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap" type="submit">Recharge Now</button></td>
+            </tr>
+        `;
+    });
+    document.getElementById('contenedor-planes').innerHTML = productos;
+
     console.log(datos)
+    console.log(datos.status)
+    console.log(datos.data)
+    return true;
 }
 
 async function consultarSaldos (){
@@ -24,7 +44,7 @@ async function consultarSaldos (){
     const datos = await respuesta.json()
     console.log(datos)
 }
-
+/*
 async function consultarServicios(){
     const respuesta = await fetch(urlServicios,options)
     const datos = await respuesta.json()
@@ -50,4 +70,11 @@ async function consultarTransaccion(requestid)
 {
     const respuesta = await fetch()
 }
+*/
 
+
+const btnVerPlanes = document.getElementById('btnVerPlanes');
+
+btnVerPlanes.addEventListener('click', () => {
+	obtenerProductos();
+});
