@@ -43,7 +43,7 @@ async function obtenerProductos (){
                 <td class="text-3 text-center align-middle">${producto.nombre}<span class="text-1 text-muted d-block">Nombre</span></td>
                 <td class="text-3 text-center align-middle">${producto.codigo}<span class="text-1 text-muted d-block">Codigo</span></td>
                 <td class="text-1 text-muted align-middle">${producto.descripcion}</td>
-                <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap" type="submit">Recharge Now</button></td>
+                <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap">Recharge Now</button></td>
             </tr>
         `;
         planes += `
@@ -59,7 +59,7 @@ async function obtenerProductos (){
     console.log(datos.data)
     return termino;
 }
-async function obtenerProductosFiltro(operadora = 0, plan = 0){
+async function obtenerProductosFiltro(operadora = document.querySelector('#operator').value, plan = 0){
     if(operadora !=0 || plan !=0){
         const respuesta = await fetch(urlProducto,options)
         const datos = await respuesta.json()
@@ -70,12 +70,12 @@ async function obtenerProductosFiltro(operadora = 0, plan = 0){
             if(producto.nombre == plan || producto.nombre == operadora)
             {
                 productos += `
-                <tr>
-                    <td class="text-5 text-primary text-center align-middle">${producto.monto} <span class="text-1 text-muted d-block">Amount</span></td>
-                    <td class="text-3 text-center align-middle">${producto.nombre}<span class="text-1 text-muted d-block">Nombre</span></td>
-                    <td class="text-3 text-center align-middle">${producto.codigo}<span class="text-1 text-muted d-block">Codigo</span></td>
-                    <td class="text-1 text-muted align-middle">${producto.descripcion}</td>
-                    <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap" type="submit">Recharge Now</button></td>
+                <tr onclick="Ejecutar">
+                        <td class="text-5 text-primary text-center align-middle">${producto.monto} <span class="text-1 text-muted d-block">Amount</span></td>
+                        <td class="text-3 text-center align-middl">${producto.nombre}<span class="text-1 text-muted d-block">Nombre</span></td>
+                        <td class="text-3 text-center align-middle">${producto.codigo}<span class="text-1 text-muted d-block"></span></td>
+                        <td class="text-1 text-muted align-middle">${producto.descripcion}</td>
+                        <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap" onclick="ejecutarRecarga(${producto.monto},'${producto.codigo}')" type="submit">Recharge Now</button></td>
                 </tr>
             `;
             planes += `
@@ -141,27 +141,30 @@ async function reservaRecarga(number,producto){
 const btnVerPlanes = document.getElementById('btnVerPlanes');
 const btnVerPlanesp = document.getElementById('btnVerPlanesP');
 
-btnVerPlanesp.addEventListener('click', () => {
+btnVerPlanesp.addEventListener('click', (event) => {
     const plan = document.getElementById('selectRecharge').value;
     const compañia = document.getElementById('operadora').value;
     if(plan != 'seleccione el plan' || compañia != 'seleccione compañia'){
-        obtenerProductosFiltro();
+        obtenerProductosFiltro(compañia,plan);
+        event.preventDefault();
     }
     else {
-        obtenerProductos();
+        event.preventDefault();
+        obtenerProductosFiltro();
     }
 
 });
 btnVerPlanes.addEventListener('click', () => {
-	obtenerProductos();
+	obtenerProductosFiltro();
 });
-async function ejecutarRecarga(){
+
+async function ejecutarRecarga(monto = 0 , codigo = 0){
     const numero = document.querySelector('#mobileNumber').value;
-    const producto = 'TEL010';
-    const resultado= await reservaRecarga(numero,producto);
+    console.log(codigo);
+    const resultado= await reservaRecarga(numero,codigo);
     console.log(resultado)
     //requestid
-    const response =  resultado.data.requestid;
+    requestidd = resultado.data.requestid;
     //monto
-    produc = '$10'
+    produc = monto;
 }
