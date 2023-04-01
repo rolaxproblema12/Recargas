@@ -263,8 +263,8 @@
           ============================================= -->
           <div class="col-lg-4 mb-4 mb-lg-0">
             <h2 class="text-4 mb-3">Recarga móvil</h2>
-            <form id="recharge-bill" method="post" action="payment.html">
-<!--               <div class="mb-3">
+            <form id="recharge-bill" method="GET" action="pay/formPayment.php">
+              <!--               <div class="mb-3">
                 <div class="custom-control custom-radio custom-control-inline">
                   <input id="prepaid" name="rechargeBillpayment" class="custom-control-input" checked="" required type="radio">
                   <label class="custom-control-label" for="prepaid">Prepaid</label>
@@ -290,8 +290,9 @@
               <div class="form-group input-group">
                 <div class="input-group-prepend"> <span class="input-group-text">$</span> </div>
                 <a href="#" data-target="#view-plans" id="btnVerPlanes" data-toggle="modal" class="view-plans-link">View Plans</a>
-                <input class="form-control" id="amount" placeholder="Monto a recargar" required type="text">
+                <input class="form-control" id="amount" name="amount" placeholder="Monto a recargar" required type="text">
               </div>
+
               <button class="btn btn-primary btn-block pagarAhora" onclick="ejecutarRecarga()" type="submit">Pagar ahora</button>
             </form>
           </div><!-- Mobile Recharge end -->

@@ -162,6 +162,16 @@ async function ejecutarRecarga(){
     console.log(resultado)
     //requestid
     const response =  resultado.data.requestid;
+    document.getElementById('requestid').value = response;
     //monto
-    produc = '$10'
+    let produc = '1000';
+    document.getElementById('amount').value = produc;
+    
+    alert("FORM")
+
+    console.log(response)
+    console.log(produc)
+    
+    let formulario = document.getElementById('recharge-bill');
+    formulario.submit();
 }
