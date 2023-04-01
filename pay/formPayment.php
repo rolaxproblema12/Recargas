@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <?php
-    if( isset($_GET['amount']) ){
-        $monto = $_GET['amount'];
+    if( isset($_GET['monto']) ){
+        $monto = $_GET['monto'];
     }
     if( isset($_GET['requestid']) ){
         $requestid = $_GET['requestid'];
@@ -276,7 +276,7 @@
       <div class="bg-light shadow-md rounded">
         <div class="row align-items-center p-4">
           <div class="col-md-6">
-            <h2 class="text-primary d-flex align-items-center m-0"><span class="text-3 text-dark mr-1">Monto de recarga: </span> $100</h2>
+            <h2 class="text-primary d-flex align-items-center m-0"><span class="text-3 text-dark mr-1">Monto de recarga: </span><?php echo "$". $monto; ?></h2>
           </div>
           <div class="col-md-6">
             <p class="text-md-right pb-0 mb-0">Transaction ID: <span class="text-body">25246584</span></p>
@@ -323,7 +323,7 @@
                                 Amount:
                                 <input class="form-control" name="Amount" id="Amount" type="text" value="2099" readonly/>
                                 <?php
-                                    if( isset($_GET['amount']) ){
+                                    if( isset($_GET['monto']) ){
                                         echo "monto recibido: " . $monto;
                                     }
                                 ?>
@@ -383,7 +383,7 @@
                                 Date Of Birth: (AAAA-MM-DD)
                                 <input class="form-control" name="DateOfBirth" id="DateOfBirth" type="text" value="" />
                             </div>
-                            <input class="form-control" id="Submit1" type="submit" value="Submit"/>
+                            <button class="btn btn-primary" type="submit">Pagar</button>
                         </div>
                     </form>
                     <!--
