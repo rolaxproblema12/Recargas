@@ -6,9 +6,10 @@
     if( isset($_POST['requestid']) ){
         $requestid = isset($_POST['requestid']);
     }
+    /*
     if( isset($_POST['currency'])){
         $currency = $_POST['currency'];
-    }
+    }*/
     
 ?>
 <html lang="en">
