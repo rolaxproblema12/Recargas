@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <?php
-    if( isset($_POST['monto']) ){
-        $monto = $_POST['monto'];
+    if( isset($_GET['amount']) ){
+        $monto = $_GET['amount'];
     }
-    if( isset($_POST['requestid']) ){
-        $requestid = isset($_POST['requestid']);
+    if( isset($_GET['requestid']) ){
+        $requestid = isset($_GET['requestid']);
     }
     /*
     if( isset($_POST['currency'])){
@@ -36,6 +36,14 @@
 <tr>
 <td>Merchant Ref:</td>
 <td><input name="MerchantRef" id="MerchantRef" type="text" value="130502203354" readonly/></td>
+<td>
+    <?php
+        if( isset($_GET['requestid']) ){
+            echo "requestid recibido: " . $requestid;
+        }
+    ?>
+</td>
+</td>
 </tr>
 <tr>
 <td>Currency:</td>
@@ -44,6 +52,13 @@
 <tr>
 <td>Amount:</td>
 <td><input name="Amount" id="Amount" type="text" value="2099" readonly/></td>
+<td>
+    <?php
+        if( isset($_GET['amount']) ){
+            echo "monto recibido: " . $monto;
+        }
+    ?>
+</td>
 </tr>
 <tr>
 <td>Success URL:</td>
