@@ -39,8 +39,8 @@ async function ejecutarRecarga(monto, codigo,numero){
     //requestid
     requestidd = resultado.data.requestid;
     console.log(requestidd);
-    document.getElementById('requestid').value = requestidd;
-
+    console.log('se inserto requestid');
+    console.log('adios...');
     let formulario = document.getElementById('formData');
     formulario.submit();
 }

@@ -7,6 +7,12 @@
     if( isset($_GET['requestid']) ){
         $requestid = $_GET['requestid'];
     }
+    if( isset($_GET['merchantRef']) ){
+      $merchantRef = $_GET['merchantRef'];
+    }
+    if( isset($_GET['signature']) ){
+      $signature = $_GET['signature'];
+    }
 ?>
 
 <html lang="en">
@@ -296,7 +302,7 @@
                     <div class="col-lg-8">
                     <form method="post" action="https://gw-test.cgate.tech/orion/hosted/Payment.aspx" id="form1">
                         <div class="form-group">
-                            <input type="hidden" name="Signature" id="Signature" value=" 863a288c6a395b017862b1432154591fb0ee78c8"/>
+                            <input type="hidden" name="Signature" id="Signature" value= <?php echo '"'.$signature.'"'; ?> />
                             
                             <div class="form-group">
                                 Merchant Name:
@@ -308,25 +314,15 @@
                             </div>
                             <div class="form-group">
                                 Merchant Ref:
-                                <input class="form-control" name="MerchantRef" id="MerchantRef" type="text" value="130502203354" readonly/>
-                                <?php
-                                    if( isset($_GET['requestid']) ){
-                                        echo "requestid recibido: " . $requestid;
-                                    }
-                                ?>
+                                <input class="form-control" name="MerchantRef" id="MerchantRef" type="text" value=<?php echo '"'.$merchantRef.'"'; ?> readonly/>
                             </div>
                             <div class="form-group">
                                 Currency:
-                                <input class="form-control" name="Currency" id="Currency" type="text" value="USD" readonly/>
+                                <input class="form-control" name="Currency" id="Currency" type="text" value="MXN" readonly/>
                             </div>
                             <div class="form-group">
                                 Amount:
-                                <input class="form-control" name="Amount" id="Amount" type="text" value="2099" readonly/>
-                                <?php
-                                    if( isset($_GET['monto']) ){
-                                        echo "monto recibido: " . $monto;
-                                    }
-                                ?>
+                                <input class="form-control" name="Amount" id="Amount" type="text" value=<?php echo '"'.$monto.'"'; ?> readonly/>
                             </div>
                             <div class="form-group">
                                 Success URL:
@@ -345,43 +341,43 @@
                             </td>
                             <div class="form-group">
                                 Firstname:
-                                <input class="form-control" name="Firstname" id="Firstname" type="text" value="" />
+                                <input class="form-control" name="Firstname" id="Firstname" type="text" value="" required />
                             </div>
                             <div class="form-group">
                                 Surname:
-                                <input class="form-control" name="Surname" id="Surname" type="text" value="" />
+                                <input class="form-control" name="Surname" id="Surname" type="text" value="" required />
                             </div>
                             <div class="form-group">
                                 City:
-                                <input class="form-control" name="City" id="City" type="text" value="" />
+                                <input class="form-control" name="City" id="City" type="text" value="" required />
                             </div>
                             <div class="form-group">
                                 Street Line 1:
-                                <input class="form-control" name="StreetLine1" id="StreetLine1" type="text" value="" />
+                                <input class="form-control" name="StreetLine1" id="StreetLine1" type="text" value="" required />
                             </div>
                             <div class="form-group">
                                 Email:
-                                <input class="form-control" name="Email" id="Email" type="text" value="" />
+                                <input class="form-control" name="Email" id="Email" type="text" value="" required />
                             </div>
                             <div class="form-group">
                                 Postal Code:
-                                <input class="form-control" name="PostalCode" id="PostalCode" type="text" value="" />
+                                <input class="form-control" name="PostalCode" id="PostalCode" type="text" value="" required />
                             </div>
                             <div class="form-group">
                                 Telephone:
-                                <input class="form-control" name="Telephone" id="Telephone" Telephone="text" value="" />
+                                <input class="form-control" name="Telephone" id="Telephone" Telephone="text" value="" required/>
                             </div>
                             <div class="form-group">
                                 State/Province:
-                                <input class="form-control" name="StateProvince" id="StateProvince" type="text" value="" />
+                                <input class="form-control" name="StateProvince" id="StateProvince" type="text" value="" required/>
                             </div>
                             <div class="form-group">
                                 Country:
-                                <input class="form-control" name="Country" id="Country" type="text" value="" />
+                                <input class="form-control" name="Country" id="Country" type="text" value="" required/>
                             </div>
                             <div class="form-group">
                                 Date Of Birth: (AAAA-MM-DD)
-                                <input class="form-control" name="DateOfBirth" id="DateOfBirth" type="text" value="" />
+                                <input class="form-control" name="DateOfBirth" id="DateOfBirth" type="date" value="" required/>
                             </div>
                             <button class="btn btn-primary" type="submit">Pagar</button>
                         </div>
