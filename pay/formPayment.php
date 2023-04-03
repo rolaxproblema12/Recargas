@@ -326,15 +326,18 @@
                             </div>
                             <div class="form-group">
                                 Success URL:
-                                <input class="form-control" name="SuccessURL" id="SuccessURL" type="text" value="https://gw-test.cgate.tech/orion/tester/TestReturn.aspx" readonly/>
+                                <input class="form-control" name="SuccessURL" id="SuccessURL" type="text" value="http://localhost/root/Recargas/pay/callbackPayment.php" readonly/>
                             </div>
                             <div class="form-group">
                                 Fail URL:
-                                <input class="form-control" name="FailURL" id="FailURL" type="text" value="https://gw-test.cgate.tech/orion/tester/TestReturn.aspx" readonly/>
+                                <input class="form-control" name="FailURL" id="FailURL" type="text" value="http://localhost/root/Recargas/pay/callbackPayment.php" readonly/>
                             </div>
                             <div class="form-group">
                                 Callback URL:
-                                <input class="form-control" name="CallbackURL" id="CallbackURL" type="text" value="https://gw-test.cgate.tech/orion/tester/TestCallback.ashx" readonly/>
+                                <input class="form-control" name="CallbackURL" id="CallbackURL" type="text" value="http://localhost/root/Recargas/pay/callbackPayment.php" readonly/>
+                                <!--
+                                <input class="form-control" name="CallbackURL" id="CallbackURL" type="text" value="callbackPayment.php" readonly/>
+                                -->
                             </div>
                             <td colspan="2">
                                 <h3 class="text-5 mb-4">Direccion de la tarjeta</h3>

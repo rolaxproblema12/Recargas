@@ -75,7 +75,7 @@ async function obtenerProductosFiltro(operadora = document.querySelector('#opera
                         <td class="text-3 text-center align-middl">${producto.nombre}<span class="text-1 text-muted d-block">Nombre</span></td>
                         <td class="text-3 text-center align-middle">${producto.codigo}<span class="text-1 text-muted d-block"></span></td>
                         <td class="text-1 text-muted align-middle">${producto.descripcion}</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap" onclick="ejecutarRecarga(${producto.monto},'${producto.codigo}')" type="submit">Recharge Now</button></td>
+                        <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap" type="submit">Recharge Now</button></td>
                 </tr>
             `;
             planes += `
