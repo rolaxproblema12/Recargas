@@ -26,7 +26,7 @@ const urlSalgo = 'https://app.sivetel.com/ApiWS/consultarSaldos';
 const urlServicios = 'https://app.sivetel.com/ApiWS/obtenerServicios';
 const urlPines= "https://app.sivetel.com/ApiWS/obtenerPines";
 const reservaRecargad = "https://app.sivetel.com/ApiWS/reservarTransaccion";
-const ejecutartranssacion="https://app.sivetel.com/ApiWS/procesarTransaccion";
+const ejecutartranssaciond="https://app.sivetel.com/ApiWS/procesarTransaccion";
 const consultarTransaccion= "https://app.sivetel.com/Api/consultarTransaccion";
 
 async function obtenerProductos (){
@@ -123,12 +123,12 @@ async function reservaRecarga(number,producto){
 //     const respuesta = await ejecutartranssacion(requestid)
 //     return respuesta;
 // }
-// async function ejecutartranssacion(idreserva)
-// {
-//     const respuesta = await fetch(ejecutartranssacion,optionsprocesaTranssacion(idreserva))
-//     const datos = await respuesta.json()
-//     return datos
-// }
+async function ejecutartranssacion(idreserva)
+{
+    const respuesta = await fetch(ejecutartranssaciond,optionsprocesaTranssacion(idreserva))
+    const datos = await respuesta.json()
+    return datos;
+}
 // async function consultarTransaccion(requestid)
 // {
 //     const respuesta = await fetch(consultarTransaccion,optionsprocesaTranssacion(requestid))
