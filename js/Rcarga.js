@@ -70,7 +70,7 @@ async function obtenerProductosFiltro(operadora = document.querySelector('#opera
             if(producto.nombre == plan || producto.nombre == operadora)
             {
                 productos += `
-                <tr onclick="Ejecutar">
+                <tr onclick="EjecutarDatos('${producto.codigo}','${producto.monto}')">
                         <td class="text-5 text-primary text-center align-middle">${producto.monto} <span class="text-1 text-muted d-block">Amount</span></td>
                         <td class="text-3 text-center align-middl">${producto.nombre}<span class="text-1 text-muted d-block">Nombre</span></td>
                         <td class="text-3 text-center align-middle">${producto.codigo}<span class="text-1 text-muted d-block"></span></td>
@@ -157,14 +157,23 @@ btnVerPlanesp.addEventListener('click', (event) => {
 btnVerPlanes.addEventListener('click', () => {
 	obtenerProductosFiltro();
 });
-
-async function ejecutarRecarga(monto = 0 , codigo = 0){
-    const numero = document.querySelector('#mobileNumber').value;
+function EjecutarDatos(codigo, monto){
+    console.log("Hola desde datos")
+    codCharge  = document.getElementById('codeRecharge');
+    codMonto = document.getElementById('amount');
+    
+    codMonto.value = monto;
+    codCharge.value = codigo;
+    console.log(monto);
     console.log(codigo);
+    
+}
+async function ejecutarRecarga(monto = 0 , codigo = 0){
+    console.log('Moneto:',monto);
+    console.log('Codigo:',codigo);
     const resultado= await reservaRecarga(numero,codigo);
     console.log(resultado)
     //requestid
     requestidd = resultado.data.requestid;
-    //monto
-    produc = monto;
+    console.log(requestidd)
 }
