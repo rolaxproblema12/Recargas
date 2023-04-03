@@ -166,6 +166,10 @@ function EjecutarDatos(codigo, monto){
     codCharge.value = codigo;
     console.log(monto);
     console.log(codigo);
+    document.querySelector('#view-plans').setAttribute('style','display: none;');
+    document.querySelector('.modal-backdrop').classList.remove('modal-backdrop','fade','show');
+
+
     
 }
 async function ejecutarRecarga(monto = 0 , codigo = 0){
