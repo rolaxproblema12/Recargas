@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <?php
-    session_start();
-    if(isset($_SESSION["g_requestid"])){
-        $requestid = $_SESSION["g_requestid"];
-        unset($_SESSION["g_requestid"]);
-    }
     $TransactionID = $_POST["TransactionID"];
     $MerchantRef = $_POST["MerchantRef"];
     $TransTypeID = $_POST["TransTypeID"];
@@ -58,7 +53,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
 </head>
-<body onload= <?php echo '"ejecutartranssacion(\''.$requestid.'\')"' ?>>
+<!--<body onload= <?php //echo '"ejecutartranssacion(\''.$requestid.'\')"' ?>>-->
+<body onload="ejecutartranssacion(sessionStorage.getItem('requestid_global'))">
 <!-- Preloader -->
 <div id="preloader"><div data-loader="dual-ring"  ></div></div><!-- Preloader End -->
 
@@ -331,6 +327,7 @@
                     <form id="form-codigos" action="finish.php">
                         Codigo Pago<input type="text" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $ResponseCode. '"' ?> /> <br>
                         Codigo Transaccion<input type="text" name="ResponseCodeTransaccion" id="ResponseCodeTransaccion" value=""/> <br>
+                        <!-- <button type="submit">Go</button> -->
                     </form>
 
                     
