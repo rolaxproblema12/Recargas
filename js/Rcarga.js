@@ -47,14 +47,13 @@ async function obtenerProductos (){
 
     });
     document.getElementById('contenedor-planes').innerHTML = productos;
-    document.getElementById('selectRecharge').innerHTML = planes;
     const termino = true;
     console.log(datos)
     console.log(datos.status)
     console.log(datos.data)
     return termino;
 }
-async function obtenerProductosFiltro(operadora = document.querySelector('#operator').value){
+async function obtenerProductosFiltro(operadora){
     if(operadora !=0 || plan !=0){
         const respuesta = await fetch(urlProducto,options)
         const datos = await respuesta.json()
@@ -76,7 +75,6 @@ async function obtenerProductosFiltro(operadora = document.querySelector('#opera
     
         });
         document.getElementById('contenedor-planes').innerHTML = productos;
-        document.getElementById('selectRecharge').innerHTML = planes;
         const termino = true;
         console.log(datos)
         console.log(datos.status)
