@@ -35,7 +35,6 @@ async function obtenerProductos (){
     const datos = await respuesta.json()
     
     let productos = '';
-    let planes = '<option value="seleccione el plan">seleccione el plan</option>';
     await datos.data.forEach(producto => {
         productos += `
             <tr>
@@ -43,11 +42,7 @@ async function obtenerProductos (){
                 <td class="text-3 text-center align-middle">${producto.nombre}<span class="text-1 text-muted d-block">Nombre</span></td>
                 <td class="text-3 text-center align-middle">${producto.codigo}<span class="text-1 text-muted d-block">Codigo</span></td>
                 <td class="text-1 text-muted align-middle">${producto.descripcion}</td>
-                <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap">Recharge Now</button></td>
             </tr>
-        `;
-        planes += `
-            <option value=${producto.nombre}>${producto.nombre}</option>
         `;
 
     });
@@ -59,15 +54,14 @@ async function obtenerProductos (){
     console.log(datos.data)
     return termino;
 }
-async function obtenerProductosFiltro(operadora = document.querySelector('#operator').value, plan = 0){
+async function obtenerProductosFiltro(operadora = document.querySelector('#operator').value){
     if(operadora !=0 || plan !=0){
         const respuesta = await fetch(urlProducto,options)
         const datos = await respuesta.json()
         
         let productos = '';
-        let planes = '<option value="seleccione el plan">seleccione el plan</option>';
         await datos.data.forEach(producto => {
-            if(producto.nombre == plan || producto.nombre == operadora)
+            if(producto.nombre == operadora)
             {
                 productos += `
                 <tr onclick="EjecutarDatos('${producto.codigo}','${producto.monto}')">
@@ -75,11 +69,7 @@ async function obtenerProductosFiltro(operadora = document.querySelector('#opera
                         <td class="text-3 text-center align-middl">${producto.nombre}<span class="text-1 text-muted d-block">Nombre</span></td>
                         <td class="text-3 text-center align-middle">${producto.codigo}<span class="text-1 text-muted d-block"></span></td>
                         <td class="text-1 text-muted align-middle">${producto.descripcion}</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap" type="submit">Recharge Now</button></td>
                 </tr>
-            `;
-            planes += `
-                <option value=${producto.nombre}>${producto.nombre}</option>
             `;
             }
 
@@ -142,20 +132,19 @@ const btnVerPlanes = document.getElementById('btnVerPlanes');
 const btnVerPlanesp = document.getElementById('btnVerPlanesP');
 
 btnVerPlanesp.addEventListener('click', (event) => {
-    const plan = document.getElementById('selectRecharge').value;
     const compañia = document.getElementById('operadora').value;
-    if(plan != 'seleccione el plan' || compañia != 'seleccione compañia'){
-        obtenerProductosFiltro(compañia,plan);
+    if(compañia != 'seleccione compañia'){
+        obtenerProductosFiltro(compañia);
         event.preventDefault();
     }
     else {
         event.preventDefault();
-        obtenerProductosFiltro();
+        obtenerProductos();
     }
 
 });
 btnVerPlanes.addEventListener('click', () => {
-	obtenerProductosFiltro();
+	obtenerProductos();
 });
 function EjecutarDatos(codigo, monto){
     console.log("Hola desde datos")
