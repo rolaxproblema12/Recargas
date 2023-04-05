@@ -37,7 +37,7 @@ async function obtenerProductos (){
     let productos = '';
     await datos.data.forEach(producto => {
         productos += `
-            <tr>
+            <tr onclick="EjecutarDatos('${producto.codigo}','${producto.monto}')">
                 <td class="text-5 text-primary text-center align-middle">${producto.monto} <span class="text-1 text-muted d-block">Amount</span></td>
                 <td class="text-3 text-center align-middle">${producto.nombre}<span class="text-1 text-muted d-block">Nombre</span></td>
                 <td class="text-3 text-center align-middle">${producto.codigo}<span class="text-1 text-muted d-block">Codigo</span></td>
