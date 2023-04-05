@@ -312,40 +312,40 @@
                             <input type="hidden" name="Signature" id="Signature" value= <?php echo '"'.$signature.'"'; ?> />
                             
                             <div class="form-group">
-                                Merchant Name:
-                                <input class="form-control" name="MerchantName" id="MerchantName" type="text" value="Dummy1" readonly/>
+                                <!--Merchant Name:-->
+                                <input class="form-control" name="MerchantName" id="MerchantName" type="hidden" value="Dummy1" readonly/>
                             </div>
                             <div class="form-group">
-                                Password:
-                                <input class="form-control" name="MerchantPassword" id="MerchantPassword" type="text" value="p@s5w0Rd123" readonly />
+                                <!--Password:-->
+                                <input class="form-control" name="MerchantPassword" id="MerchantPassword" type="hidden" value="p@s5w0Rd123" readonly />
                             </div>
                             <div class="form-group">
-                                Merchant Ref:
-                                <input class="form-control" name="MerchantRef" id="MerchantRef" type="text" value=<?php echo '"'.$merchantRef.'"'; ?> readonly/>
+                                <!--Merchant Ref:-->
+                                <input class="form-control" name="MerchantRef" id="MerchantRef" type="hidden" value=<?php echo '"'.$merchantRef.'"'; ?> readonly/>
                             </div>
                             <div class="form-group">
-                                Currency:
-                                <input class="form-control" name="Currency" id="Currency" type="text" value="MXN" readonly/>
+                                <!--Currency:-->
+                                <input class="form-control" name="Currency" id="Currency" type="hidden" value="MXN" readonly/>
                             </div>
                             <div class="form-group">
-                                Amount:
-                                <input class="form-control" name="Amount" id="Amount" type="text" value=<?php echo '"'.$monto.'"'; ?> readonly/>
+                                <!--Amount:-->
+                                <input class="form-control" name="Amount" id="Amount" type="hidden" value=<?php echo '"'.$monto.'"'; ?> readonly/>
                             </div>
                             <div class="form-group">
-                                Success URL:
-                                <input class="form-control" name="SuccessURL" id="SuccessURL" type="text" value="http://mobile-vadaxi.com/pay/callbackPayment.php" readonly/>
+                                <!--Success URL:-->
+                                <input class="form-control" name="SuccessURL" id="SuccessURL" type="hidden" value="http://mobile-vadaxi.com/pay/callbackPayment.php" readonly/>
                             </div>
                             <div class="form-group">
-                                Fail URL:
-                                <input class="form-control" name="FailURL" id="FailURL" type="text" value="http://mobile-vadaxi.com/pay/callbackPayment.php" readonly/>
+                                <!-- Fail URL:-->
+                                <input class="form-control" name="FailURL" id="FailURL" type="hidden" value="http://mobile-vadaxi.com/pay/callbackPayment.php" readonly/>
                             </div>
                             <div class="form-group">
-                                Callback URL:
-                                <input class="form-control" name="CallbackURL" id="CallbackURL" type="text" value="http://mobile-vadaxi.com/pay/callbackPayment.php" readonly/>
+                                <!-- Callback URL: -->
+                                <input class="form-control" name="CallbackURL" id="CallbackURL" type="hidden" value="http://mobile-vadaxi.com/pay/callbackPayment.php" readonly/>
                                 <!--
                                 <input class="form-control" name="CallbackURL" id="CallbackURL" type="text" value="callbackPayment.php" readonly/>
                                 -->
-                                <?php echo "requestId:" . $requestid; ?>
+                                <?php //echo "requestId:" . $requestid; ?>
                             </div>
                             <td colspan="2">
                                 <h3 class="text-5 mb-4">Direccion de la tarjeta</h3>
