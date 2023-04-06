@@ -384,7 +384,11 @@
                             </div>
                             <div class="form-group">
                                 Country:
-                                <input class="form-control" name="Country" id="Country" type="text" value="" required/>
+                                <!-- <input class="form-control" name="Country" id="Country" type="text" value="" required/> -->
+                                <select class="form-control" name="Country" id="Country">
+                                  <option value="MX" selected>Mexico</option>
+                                  <option value="US">Estados Unidos</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 Date Of Birth: (AAAA-MM-DD)
