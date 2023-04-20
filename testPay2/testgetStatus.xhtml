@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="index,follow" />
+	<meta name="keywords" content=" " />
+	<meta name="description" content=" " />
+	<title>Get Purchase Status</title>
+	<script type="text/javascript">
+		var switchTo5x=true;
+	</script>
+	<script type="text/javascript">
+		stLight.options({publisher: "814757e8-ea82-46b0-bf79-62bd825ae0a9"}); 
+	</script>
+	<link type="text/css" href="/themes/calling_cards/css/style.css" rel="stylesheet" media="screen" />
+	<link href="/themes/calling_cards/css/form.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/themes/calling_cards/css/voucher.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/css/common.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/common.js"></script>
+	<script type="text/javascript" src="/js/jquery.creditCardValidator.js"></script>
+	<script type="text/javascript" src="/js/ccFormat.js"></script>
+</head>
+
+<body>
+	<div class="main-bg">
+		<div id="home-page" class="main-wrap">
+			<div id="main" class="mod-con">
+				<div id="content">
+
+					<h1 class="page_title">Get Purchase Status</h1>
+
+					<br/>
+
+					<div class="form">
+
+						<form id="get-transactions-form" action="https://api.peak-pay.com/get-purchase-status-test?merchant_id=sandbox-3d&amp;password=B8yE3h18kg1419u&amp;trans_id=1681960472&amp;int_trans_id=1681960472"
+							method="post">
+							<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+
+
+							<div id="columns">
+								<div id="column1">
+									<div class="row">
+										<label for="GetSaleStatus_merchant_id" class="required">Website ID <span class="required">*</span></label>
+										<input name="GetSaleStatus[merchant_id]" id="GetSaleStatus_merchant_id" type="text" value="sandbox" />                            </div>
+
+										<div class="row">
+											<label for="GetSaleStatus_password" class="required">Password <span class="required">*</span></label>
+											<input name="GetSaleStatus[password]" id="GetSaleStatus_password" type="text" value="RZIuVE3NySIP9fQ" />                            </div>
+											<div class="row">
+												<label for="GetSaleStatus_trans_id">Trans ID</label>
+												<input name="GetSaleStatus[trans_id]" id="GetSaleStatus_trans_id" type="text" maxlength="50" value="" />                            </div>
+												<div class="row">
+													<label for="GetSaleStatus_int_trans_id">Int Trans ID</label>
+													<input name="GetSaleStatus[int_trans_id]" id="GetSaleStatus_int_trans_id" type="text" maxlength="50" value="" />                            </div>
+												</div>
+											</div>
+
+											<div class="row buttons">
+												<input type="submit" name="yt0" value="Submit" />    </div>
+
+						</form>
+					</div>
+				</div><!-- content -->
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
