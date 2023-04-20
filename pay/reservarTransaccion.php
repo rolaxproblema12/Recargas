@@ -5,6 +5,7 @@
     $numero = $_GET['mobileNumber'];
     $codigo = $_GET['codeRecharge'];
     $monto = str_replace(".","",$_GET['amount']);
+    $monto_fomato = $_GET['amount'];
     $merchantRef = "130502203354";
     $signature = sha1("p@s5w0Rd123" . $merchantRef . "MXN" . $monto,false);
 ?>
@@ -23,6 +24,7 @@
         <input type="hidden" id="numero" name="numero" value= <?php echo '"'.$numero.'"'; ?> ><br>
         <input type="hidden" id="codigo" name="codigo" value= <?php echo '"'.$codigo.'"'; ?>><br>
         <input type="hidden" id="monto" name="monto" value= <?php echo '"'.$monto.'"'; ?>> <br>
+        <input type="hidden" id="monto_fomato" name="monto_fomato" value= <?php echo '"'.$monto_fomato.'"'; ?>> <br>
         <input type="hidden" id="merchantRef" name="merchantRef" value=<?php echo '"'.$merchantRef.'"'; ?>><br>
         <input type="hidden" id="signature" name="signature" value=<?php echo '"'.$signature.'"'; ?>><br>
         <input type="hidden" id="requestid" name="requestid" value=""><br>

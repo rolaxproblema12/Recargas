@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 
 <?php
-    session_start();
     if( isset($_GET['monto']) ){
         $monto = $_GET['monto'];
     }
+    if( isset($_GET['monto_fomato']) ){
+      $monto_fomato = $_GET['monto_fomato'];
+  }
     if( isset($_GET['requestid']) ){
         $requestid = $_GET['requestid'];
-        $_SESSION["g_requestid"] = $requestid;
     }
     if( isset($_GET['merchantRef']) ){
       $merchantRef = $_GET['merchantRef'];
@@ -40,6 +41,10 @@
 <link rel="stylesheet" type="text/css" href="../vendor/owl.carousel/assets/owl.theme.default.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
+<script>
+  sessionStorage.setItem('requestid_global', <?php echo "'".$requestid."'"; ?> );
+</script>
 
 </head>
 <body>
@@ -284,7 +289,7 @@
       <div class="bg-light shadow-md rounded">
         <div class="row align-items-center p-4">
           <div class="col-md-6">
-            <h2 class="text-primary d-flex align-items-center m-0"><span class="text-3 text-dark mr-1">Monto de recarga: </span><?php echo "$". $monto; ?></h2>
+            <h2 class="text-primary d-flex align-items-center m-0"><span class="text-3 text-dark mr-1">Monto de recarga: </span><?php echo "$". $monto_fomato; ?></h2>
           </div>
           <div class="col-md-6">
             <p class="text-md-right pb-0 mb-0">Transaction ID: <span class="text-body">25246584</span></p>
@@ -307,40 +312,40 @@
                             <input type="hidden" name="Signature" id="Signature" value= <?php echo '"'.$signature.'"'; ?> />
                             
                             <div class="form-group">
-                                Merchant Name:
-                                <input class="form-control" name="MerchantName" id="MerchantName" type="text" value="Dummy1" readonly/>
+                                <!--Merchant Name:-->
+                                <input class="form-control" name="MerchantName" id="MerchantName" type="hidden" value="Dummy1" readonly/>
                             </div>
                             <div class="form-group">
-                                Password:
-                                <input class="form-control" name="MerchantPassword" id="MerchantPassword" type="text" value="p@s5w0Rd123" readonly />
+                                <!--Password:-->
+                                <input class="form-control" name="MerchantPassword" id="MerchantPassword" type="hidden" value="p@s5w0Rd123" readonly />
                             </div>
                             <div class="form-group">
-                                Merchant Ref:
-                                <input class="form-control" name="MerchantRef" id="MerchantRef" type="text" value=<?php echo '"'.$merchantRef.'"'; ?> readonly/>
+                                <!--Merchant Ref:-->
+                                <input class="form-control" name="MerchantRef" id="MerchantRef" type="hidden" value=<?php echo '"'.$merchantRef.'"'; ?> readonly/>
                             </div>
                             <div class="form-group">
-                                Currency:
-                                <input class="form-control" name="Currency" id="Currency" type="text" value="MXN" readonly/>
+                                <!--Currency:-->
+                                <input class="form-control" name="Currency" id="Currency" type="hidden" value="MXN" readonly/>
                             </div>
                             <div class="form-group">
-                                Amount:
-                                <input class="form-control" name="Amount" id="Amount" type="text" value=<?php echo '"'.$monto.'"'; ?> readonly/>
+                                <!--Amount:-->
+                                <input class="form-control" name="Amount" id="Amount" type="hidden" value=<?php echo '"'.$monto.'"'; ?> readonly/>
                             </div>
                             <div class="form-group">
-                                Success URL:
-                                <input class="form-control" name="SuccessURL" id="SuccessURL" type="text" value="http://localhost/root/Recargas/pay/callbackPayment.php" readonly/>
+                                <!--Success URL:-->
+                                <input class="form-control" name="SuccessURL" id="SuccessURL" type="hidden" value="http://mobile-vadaxi.com/pay/callbackPayment.php" readonly/>
                             </div>
                             <div class="form-group">
-                                Fail URL:
-                                <input class="form-control" name="FailURL" id="FailURL" type="text" value="http://localhost/root/Recargas/pay/callbackPayment.php" readonly/>
+                                <!-- Fail URL:-->
+                                <input class="form-control" name="FailURL" id="FailURL" type="hidden" value="http://mobile-vadaxi.com/pay/callbackPayment.php" readonly/>
                             </div>
                             <div class="form-group">
-                                Callback URL:
-                                <input class="form-control" name="CallbackURL" id="CallbackURL" type="text" value="http://localhost/root/Recargas/pay/callbackPayment.php" readonly/>
+                                <!-- Callback URL: -->
+                                <input class="form-control" name="CallbackURL" id="CallbackURL" type="hidden" value="http://mobile-vadaxi.com/pay/callbackPayment.php" readonly/>
                                 <!--
                                 <input class="form-control" name="CallbackURL" id="CallbackURL" type="text" value="callbackPayment.php" readonly/>
                                 -->
-                                <?php echo "requestId:" . $requestid; ?>
+                                <?php //echo "requestId:" . $requestid; ?>
                             </div>
                             <td colspan="2">
                                 <h3 class="text-5 mb-4">Direccion de la tarjeta</h3>
@@ -379,7 +384,11 @@
                             </div>
                             <div class="form-group">
                                 Country:
-                                <input class="form-control" name="Country" id="Country" type="text" value="" required/>
+                                <!-- <input class="form-control" name="Country" id="Country" type="text" value="" required/> -->
+                                <select class="form-control" name="Country" id="Country">
+                                  <option value="MX" selected>Mexico</option>
+                                  <option value="US">Estados Unidos</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 Date Of Birth: (AAAA-MM-DD)
