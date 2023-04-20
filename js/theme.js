@@ -240,3 +240,20 @@ $('.smooth-scroll a').on("click", function() {
 });
 
 })(jQuery);
+function generarIdtransaction(){
+	let fecha = new Date();
+    let hora = {
+        dd: fecha.getDate(),
+        mm: fecha.getMonth() + 1,
+        yy: fecha.getFullYear().toString().slice(-2),
+		hr: fecha.getHours(),
+		mm: fecha.getMinutes(),
+		sc: fecha.getSeconds()
+
+        
+    }
+
+    let rol = `${hora.dd}${hora.mm}${hora.yy}${hora.hr}${hora.mm}${hora.sc}`
+	return(parseInt(rol.replace(" ","")));
+}
+console.log(generarIdtransaction());
