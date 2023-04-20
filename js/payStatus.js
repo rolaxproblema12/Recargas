@@ -8,5 +8,11 @@ function optionsGetPurchaseStatus (trans_id) {
     return optionPurchaseStatus;
 };
 
+async function obtenerRespuesta(){
+    const response = await fetch(ejecutartranssaciond,optionsGetPurchaseStatus(182546899582948));
+    const datos = await response.json();
+    console.log(datos);
+}
 
+obtenerRespuesta();
 
