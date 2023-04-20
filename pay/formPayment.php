@@ -316,15 +316,24 @@
 							<div id="columns">
 
 								<div id="column1">
-									<h2>Merchant Login</h2>
-									<div class="row">
-										<label for="PurchaseCard_merchant_id" class="required">Merchant Id <span class="required">*</span></label>
-										<input class="form-control" name="PurchaseCard[merchant_id]" id="PurchaseCard_merchant_id" type="text" value="sandbox-3d" />                                    </div>
+									<!--
+                  <h2>Merchant Login</h2>
+									-->
+                  <div class="row">
+										<!-- 
+                    <label for="PurchaseCard_merchant_id" class="required">Merchant Id <span class="required">*</span></label>
+                    -->
+										<input class="form-control" name="PurchaseCard[merchant_id]" id="PurchaseCard_merchant_id" type="hidden" value="sandbox-3d" />                                    </div>
 
 										<div class="row">
-											<label for="PurchaseCard_password" class="required">Password <span class="required">*</span></label>
-											<input class="form-control" name="PurchaseCard[password]" id="PurchaseCard_password" type="text" value="B8yE3h18kg1419u" />                                        </div>
-											<h2>Card Information</h2>
+											<!--
+                      <label for="PurchaseCard_password" class="required">Password <span class="required">*</span></label>
+											-->
+                      
+                      <input class="form-control" name="PurchaseCard[password]" id="PurchaseCard_password" type="hidden" value="B8yE3h18kg1419u" />                                        </div>
+											
+                      
+                      <h2>Card Information</h2>
 											<div class="row">
 												<label for="PurchaseCard_first_name" class="required">First Name <span class="required">*</span></label>
 												<input class="form-control" name="PurchaseCard[first_name]" id="PurchaseCard_first_name" type="text" value="Michael" />                                    </div>
@@ -1191,6 +1200,7 @@
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../vendor/owl.carousel/owl.carousel.min.js"></script> 
 <script src="../js/theme.js"></script> 
+
 
 </body>
 </html>
