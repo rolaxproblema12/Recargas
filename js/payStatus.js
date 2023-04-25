@@ -1,19 +1,23 @@
-const ejecutartranssaciond="https://api.peak-pay.com/get-purchase-status-test";
+const url = "https://api.peak-pay.com/get-purchase-status";
 
-function optionsGetPurchaseStatus (trans_id) {
-    const optionPurchaseStatus ={
+function optionsGetPurchaseStatus () {
+    const form = new FormData(document.getElementById("formulario1"));
+
+    const datos = [ form.get("merchant_id"), form.get("password"), form.get("trans_id"), form.get("int_trans_id"), form.get("website_id") ];
+    //console.log(datos); 
+
+    const optionPurchaseStatus = {
         method: 'POST',
-        body: new URLSearchParams({merchant_id: 'sandbox-3d', password: 'B8yE3h18kg1419u', trans_id: trans_id,int_trans_id: trans_id})
+        mode: 'no-cors',
+        body: form
     }
     return optionPurchaseStatus;
 };
 
 async function obtenerRespuesta(){
-    const response = await fetch(ejecutartranssaciond,optionsGetPurchaseStatus(182546899582948));
-    const datos = await response.json();
-    console.log(datos);
+    const response = await fetch(url ,optionsGetPurchaseStatus());
+    console.log(response); 
+    const datos = await response.text();
+    console.log(datos); 
+
 }
-
-obtenerRespuesta();
-
-
