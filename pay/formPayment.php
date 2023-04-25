@@ -308,7 +308,7 @@
                   <div class="row">
                     <div class="col-lg-8">
                     <!-- START FORM PAYMENT -->
-                    <form id="purchase-card-PurchaseCard-form" action="https://api.peak-pay.com/purchase-test" method="post">
+                    <form id="purchase-card-PurchaseCard-form" action="https://api.peak-pay.com/purchase" method="post">
 							<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 
@@ -316,15 +316,24 @@
 							<div id="columns">
 
 								<div id="column1">
-									<h2>Merchant Login</h2>
-									<div class="row">
-										<label for="PurchaseCard_merchant_id" class="required">Merchant Id <span class="required">*</span></label>
-										<input class="form-control" name="PurchaseCard[merchant_id]" id="PurchaseCard_merchant_id" type="text" value="sandbox-3d" />                                    </div>
+									<!--
+                  <h2>Merchant Login</h2>
+									-->
+                  <div class="row">
+										<!-- 
+                    <label for="PurchaseCard_merchant_id" class="required">Merchant Id <span class="required">*</span></label>
+                    -->
+										<input class="form-control" name="PurchaseCard[merchant_id]" id="PurchaseCard_merchant_id" type="hidden" value="sandbox" />                                    </div>
 
 										<div class="row">
-											<label for="PurchaseCard_password" class="required">Password <span class="required">*</span></label>
-											<input class="form-control" name="PurchaseCard[password]" id="PurchaseCard_password" type="text" value="B8yE3h18kg1419u" />                                        </div>
-											<h2>Card Information</h2>
+											<!--
+                      <label for="PurchaseCard_password" class="required">Password <span class="required">*</span></label>
+											-->
+                      
+                      <input class="form-control" name="PurchaseCard[password]" id="PurchaseCard_password" type="hidden" value="RZIuVE3NySIP9fQ" />                                        </div>
+											
+                      
+                      <h2>Card Information</h2>
 											<div class="row">
 												<label for="PurchaseCard_first_name" class="required">First Name <span class="required">*</span></label>
 												<input class="form-control" name="PurchaseCard[first_name]" id="PurchaseCard_first_name" type="text" value="Michael" />                                    </div>
@@ -333,7 +342,7 @@
 													<input class="form-control" name="PurchaseCard[last_name]" id="PurchaseCard_last_name" type="text" value="Winslow" />                                    </div>
 													<div class="row">
 														<label for="PurchaseCard_card_number" class="required">Card Number <span class="required">*</span></label>
-														<input class="form-control" name="PurchaseCard[card_number]" id="PurchaseCard_card_number" type="text" value="4387751111111111" />		                </div>
+														<input class="form-control" name="PurchaseCard[card_number]" id="PurchaseCard_card_number" type="text" value="4597723679422665" />		                </div>
 														<div class="row">
 															<label for="PurchaseCard_expiry_date_month" class="required">Expiration Date <span class="required">*</span></label>
 															<select class="form-control" name="PurchaseCard[expiry_date_month]" id="PurchaseCard_expiry_date_month">
@@ -1191,6 +1200,7 @@
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../vendor/owl.carousel/owl.carousel.min.js"></script> 
 <script src="../js/theme.js"></script> 
+
 
 </body>
 </html>
