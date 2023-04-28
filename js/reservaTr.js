@@ -31,25 +31,35 @@ async function reservaRecarga(number,producto){
 }
 
 async function ejecutarRecarga(monto, codigo,numero){
-    if(respuesta)
-    {
-        console.log('Moneto:',monto);
-        console.log('Codigo:',codigo);
-        console.log('numero:',numero);
-        const resultado= await reservaRecarga(numero,codigo);
-        console.log(resultado)
-        //requestid
-        requestidd = resultado.data.requestid;
-        console.log(requestidd);
-        document.getElementById("requestid").value = requestidd;
-        console.log('se inserto requestid');
-        console.log('adios...');
-        let formulario = document.getElementById('formData');
-        formulario.submit();
-    }
-    else{
-        alert("No se completo la recarga");
-        location.href = "../index.html";
-    }
+    console.log('Moneto:',monto);
+    console.log('Codigo:',codigo);
+    console.log('numero:',numero);
+    const resultado= await reservaRecarga(numero,codigo);
+    console.log(resultado)
+    //Trans id
+    document.getElementById("transid").value = document.getElementById("numero").value + generarIdtransaction();
 
+    //requestid
+    requestidd = resultado.data.requestid;
+    console.log(requestidd);
+    document.getElementById("requestid").value = requestidd;
+    console.log('se inserto requestid');
+    console.log('adios...');
+    let formulario = document.getElementById('formData');
+    formulario.submit();
 }
+
+function generarIdtransaction(){
+	let fecha = new Date();
+    let hora = {
+        dd: fecha.getDate(),
+        mm: fecha.getMonth() + 1,
+        yy: fecha.getFullYear().toString().slice(-2),
+		hr: fecha.getHours(),
+		mm: fecha.getMinutes(),
+		sc: fecha.getSeconds()   
+    }
+    let rol = `${hora.dd}${hora.mm}${hora.yy}${hora.hr}${hora.mm}${hora.sc}`
+	return(parseInt(rol.replace(" ","")));
+}
+

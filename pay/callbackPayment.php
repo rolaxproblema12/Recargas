@@ -56,21 +56,26 @@
     else{
         $data = json_decode($response);
         $text = utf8_decode($response);
-        echo($text);
+        //echo($text);
 
+        /*
         echo "<br/>";
         echo "<br/>";
         echo "<br/>";
-
+        */
         if (isset($data->status_code)) {
             $valor = $data->status_code;
+            /*
             echo("status: " . $valor);
             echo "<br/>";
+            */
         }
         if (isset($data->message)) {
             $valor2 = $data->message;
+            /*
             echo("message: " . $valor2);
             echo "<br/>";
+            */
         }
     }
 ?>
@@ -104,15 +109,16 @@
 >
 
     <form id="form-codigos" action="finish.php">
-        <input type="text" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $valor. '"' ?> /> <br>
-        <input type="text" name="ResponseCodeTransaccion" id="ResponseCodeTransaccion" value=""/> <br>
+        <input type="hidden" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $valor. '"' ?> /> <br>
+        <input type="hidden" name="messagePago" id="messagePago" value=<?php echo '"'. $valor2. '"' ?> /> <br>
+        <input type="hidden" name="ResponseCodeTransaccion" id="ResponseCodeTransaccion" value=""/> <br>
         <!-- <button type="submit">Go</button> -->
     </form>
 
     <div class="center">  
           <div class="loader"></div>
     </div>
-    <!-- 
+
     <style>
         .center{
             width: 100%;
@@ -135,6 +141,5 @@
       100% { transform: rotate(360deg); }
     }
     </style>
-    -->
     <script src="../js/terminarTr.js"></script> 
 </body>

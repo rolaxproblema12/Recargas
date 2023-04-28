@@ -25,6 +25,7 @@
         <input type="hidden" id="merchantRef" name="merchantRef" value=<?php echo '"'.$merchantRef.'"'; ?>><br>
         <input type="hidden" id="signature" name="signature" value=<?php echo '"'.$signature.'"'; ?>><br>
         <input type="hidden" id="requestid" name="requestid" value=""><br>
+        <input type="hidden" id="transid" name="transid" value=""><br>
     </form>
     <script src="../js/reservaTr.js"></script>
 </body>

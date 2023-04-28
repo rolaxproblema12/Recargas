@@ -16,6 +16,9 @@
     if( isset($_GET['signature']) ){
       $signature = $_GET['signature'];
     } 
+    if( isset($_GET['transid']) ){
+      $transid = $_GET['transid'];
+    } 
 ?>
 
 <html lang="en">
@@ -836,9 +839,9 @@
                           <option value="ZW">Zimbabwe</option>
                         </select>
                         
-                        <h2>Order Information</h2>
+                        <h2>Order Information</h2> 
                         <label for="trans_id" class="required">Trans Id <span class="required">*</span></label><br/>
-                        <input class="form-control" name="trans_id" id="trans_id" type="text" value="1682638022" /><br/>
+                        <input class="form-control" name="trans_id" id="trans_id" type="text" value=<?php echo '"' . $transid . '"'; ?> /><br/>
 
                         <label for="customer_id" class="required">Customer Id <span class="required">*</span></label><br/>
                         <input class="form-control" name="customer_id" id="customer_id" type="text" value="10" /><br/>

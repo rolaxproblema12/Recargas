@@ -2,6 +2,7 @@
 <?php
     $codigoPago = $_GET["ResponseCodePago"];
     $codigoTransaccion = $_GET["ResponseCodeTransaccion"];
+    $message = $_GET["messagePago"];
 ?>
 <head>
 <meta charset="UTF-8" />
@@ -296,10 +297,10 @@
                             </div>
                             ';
                         }
-                        else{
+                        else if($codigoPago != "0" && $codigoPago != "1"){
                             echo '
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Ha ocurrido un error!</strong> No se ha podido completar tu recarga.
+                                <strong>Ha ocurrido un error!</strong> ' . $message .'
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
