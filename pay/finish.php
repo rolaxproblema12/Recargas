@@ -286,7 +286,7 @@
                         echo "Codigo Transaccion: " . $codigoTransaccion . "<br>";
 
 
-                        if(($codigoPago == "0"&& $codigoPago == "1") && $codigoTransaccion == "0"){
+                        if( ($codigoPago == "0" || $codigoPago == "1") && $codigoTransaccion == "0"){
                             echo '
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>Recarga exitosa!</strong> Tu recarga ha sido realizada con exito.

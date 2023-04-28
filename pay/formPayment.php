@@ -310,13 +310,14 @@
                       <!-- START FORM PAYMENT -->
                     
                       <form id="purchase-card-PurchaseCard-form" action="callbackPayment.php" method="post">
+                        <!--
                         <h2>Merchant Login</h2>
                         <label for="merchant_id" class="required">Merchant Id <span class="required">*</span></label> <br/>
                         <input class="form-control" name="merchant_id" id="merchant_id" type="text" value="sandbox" /><br/>
 
                         <label for="password" class="required">Password <span class="required">*</span></label><br/>
                         <input class="form-control" name="password" id="password" type="text" value="RZIuVE3NySIP9fQ" /><br/>
-
+                        -->
                         <h2>Card Information</h2>
                         <label for="first_name" class="required">First Name <span class="required">*</span></label><br/>
                         <input class="form-control" name="first_name" id="first_name" type="text" value="Michael" /><br/>
@@ -377,10 +378,12 @@
                         <br/>
 
                         <label for="cv2" class="required">CVV/ CV2 <span class="required">*</span></label><br/>
-                        <input class="form-control" name="cv2" id="cv2" type="text" maxlength="4" value="123" /><br/>
-
+                        <input class="form-control" name="cv2" id="cv2" type="text" maxlength="4" value="123" />
+                        
+                        <!--
                         <label for="amount" class="required">Amount <span class="required">*</span></label><br/>
-                        <input class="form-control" name="amount" id="amount" type="text" value= <?php echo '"' . str_replace(".","",$monto_fomato) . '"' ?> readonly/><br/>
+                        -->
+                        <input class="form-control" name="amount" id="amount" type="hidden" value= <?php echo '"' . str_replace(".","",$monto_fomato) . '"' ?> readonly/><br/>
 
                         <label for="currency_code" class="required">Currency Code <span class="required">*</span></label><br/>
                         <select class="form-control" name="currency_code" id="currency_code">

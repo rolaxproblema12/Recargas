@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
-    $merchant_id = $_POST["merchant_id"];
-    $password = $_POST["password"];
+    $merchant_id = "sandbox";
+    $password = "RZIuVE3NySIP9fQ";
     $first_name = $_POST["first_name"];
     $last_name = $_POST["last_name"];
     $card_number = $_POST["card_number"];
