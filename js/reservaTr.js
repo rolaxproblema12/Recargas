@@ -31,17 +31,25 @@ async function reservaRecarga(number,producto){
 }
 
 async function ejecutarRecarga(monto, codigo,numero){
-    console.log('Moneto:',monto);
-    console.log('Codigo:',codigo);
-    console.log('numero:',numero);
-    const resultado= await reservaRecarga(numero,codigo);
-    console.log(resultado)
-    //requestid
-    requestidd = resultado.data.requestid;
-    console.log(requestidd);
-    document.getElementById("requestid").value = requestidd;
-    console.log('se inserto requestid');
-    console.log('adios...');
-    let formulario = document.getElementById('formData');
-    formulario.submit();
+    if(respuesta)
+    {
+        console.log('Moneto:',monto);
+        console.log('Codigo:',codigo);
+        console.log('numero:',numero);
+        const resultado= await reservaRecarga(numero,codigo);
+        console.log(resultado)
+        //requestid
+        requestidd = resultado.data.requestid;
+        console.log(requestidd);
+        document.getElementById("requestid").value = requestidd;
+        console.log('se inserto requestid');
+        console.log('adios...');
+        let formulario = document.getElementById('formData');
+        formulario.submit();
+    }
+    else{
+        alert("No se completo la recarga");
+        location.href = "../index.html";
+    }
+
 }
