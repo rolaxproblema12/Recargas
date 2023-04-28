@@ -16,10 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body onload= <?php
-            //action="formPayment.php"
-            echo '"ejecutarRecarga(\'' . $monto . '\',\''. $codigo .'\',\''. $numero .'\')"';
-        ?>>
+<body onload= <?php echo '"ejecutarRecarga(\'' . $monto . '\',\''. $codigo .'\',\''. $numero .'\')"'; ?> >
     <form id="formData" action="formPayment.php" metod="get">
         <input type="hidden" id="numero" name="numero" value= <?php echo '"'.$numero.'"'; ?> ><br>
         <input type="hidden" id="codigo" name="codigo" value= <?php echo '"'.$codigo.'"'; ?>><br>

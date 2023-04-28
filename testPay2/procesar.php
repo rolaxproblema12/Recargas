@@ -17,7 +17,18 @@
         echo("Error :(");
     }
     else{
-        $data = utf8_decode($response);
-        echo($data);
+        $data = json_decode($response);
+        $text = utf8_decode($response);
+        echo($text);
+
+        echo "<br/>";
+        echo "<br/>";
+        echo "<br/>";
+
+        if (isset($data->status_code)) {
+            $valor = $data->status_code;
+            echo("status: " . $valor);
+            // Utilizar el valor de la propiedad
+        }
     }
 ?>
