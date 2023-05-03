@@ -15,13 +15,14 @@
     <title>Document</title>
 </head>
 <body onload= <?php echo '"ejecutarRecarga(\'' . $monto . '\',\''. $codigo .'\',\''. $numero .'\')"'; ?> >
-    <form id="formData" action="formPayment.php" metod="POST">
-        <input type="hidden" id="numero" name="numero" value= <?php echo '"'.$numero.'"'; ?> ><br>
-        <input type="hidden" id="codigo" name="codigo" value= <?php echo '"'.$codigo.'"'; ?>><br>
-        <input type="hidden" id="monto" name="monto" value= <?php echo '"'.$monto.'"'; ?>> <br>
-        <input type="hidden" id="monto_fomato" name="monto_fomato" value= <?php echo '"'.$monto_fomato.'"'; ?>> <br>
-        <input type="hidden" id="requestid" name="requestid" value=""><br>
-        <input type="hidden" id="transid" name="transid" value=""><br>
+    <form id="formData" action="formPayment.php" metod="post">
+        <input type="text" id="numero" name="numero" value= <?php echo '"'.$numero.'"'; ?> ><br>
+        <input type="text" id="codigo" name="codigo" value= <?php echo '"'.$codigo.'"'; ?>><br>
+        <input type="text" id="monto" name="monto" value= <?php echo '"'.$monto.'"'; ?>> <br>
+        <input type="text" id="monto_fomato" name="monto_fomato" value= <?php echo '"'.$monto_fomato.'"'; ?>> <br>
+        <input type="text" id="requestid" name="requestid" value=""><br>
+        <input type="text" id="transid" name="transid" value=""><br>
+        <input type="submit" value="GO"><br>
     </form>
     <script src="../js/reservaTr.js"></script>
 </body>
