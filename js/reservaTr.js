@@ -1,3 +1,5 @@
+/*CONSTANTES*/ 
+
 const cuenta = 'cuenta/4421001010';
 const usuario = 'usuario/jcervantes.test';
 const password = 'password/ws123456';
@@ -8,6 +10,8 @@ const options = {
 
 const reservaRecargad = "https://app.sivetel.com/ApiWS/reservarTransaccion";
 
+
+/*-------------------------------FUNCIONES---------------------------------*/
 function optionsReservaTrasaccion (numero, producto) {
     const optionNeReserva ={
         method: 'POST',
