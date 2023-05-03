@@ -19,8 +19,10 @@
     $postal_code = $_POST["postal_code"];
     $country_code = $_POST["country_code"];
     $trans_id = $_POST["trans_id"];
-    $customer_id = $_POST["customer_id"];
-    $customer_ip_address = $_POST["customer_ip_address"]; 
+
+
+    $customer_id = "10";
+    $customer_ip_address = "139.59.117.119"; 
     $requestid = $_POST["requestid"]; 
 
     //Consume API
@@ -93,7 +95,12 @@
 </head>
 <body 
     <?php
-        echo 'onload=\'ejecutartranssacion("' . $requestid . '")\'';
+        if($codigo_status == "0" || $codigo_status == "1"){
+            echo 'onload=\'ejecutartranssacion("' . $requestid . '")\'';
+        }
+        else{
+            echo "onload=terminarProceso()";
+        }
     ?>
 >
 
@@ -101,7 +108,6 @@
         <input type="hidden" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $codigo_status. '"' ?> /> <br>
         <input type="hidden" name="messagePago" id="messagePago" value=<?php echo '"'. $mensaje. '"' ?> /> <br>
         <input type="hidden" name="ResponseCodeTransaccion" id="ResponseCodeTransaccion" value=""/> <br>
-        <!-- <button type="submit">Go</button> -->
     </form>
 
     <div class="center">  

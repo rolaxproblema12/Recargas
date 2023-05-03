@@ -25,8 +25,12 @@ async function ejecutartranssacion(idreserva)
     console.log(datos);
     console.log(datos.error);
     document.getElementById("ResponseCodeTransaccion").value = datos.error
-    //return datos;
-    //sumit al formulario
+
+    let formulario = document.getElementById('form-codigos');
+    formulario.submit();
+}
+
+function terminarProceso(){
     let formulario = document.getElementById('form-codigos');
     formulario.submit();
 }

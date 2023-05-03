@@ -2,17 +2,17 @@
 
 <?php
     //Form reservarTransaccion.php
-    if( isset($_GET['monto']) ){
-        $monto = $_GET['monto'];
+    if( isset($_POST['monto']) ){
+        $monto = $_POST['monto'];
     }
-    if( isset($_GET['monto_fomato']) ){
-      $monto_fomato = $_GET['monto_fomato'];
+    if( isset($_POST['monto_fomato']) ){
+      $monto_fomato = $_POST['monto_fomato'];
     }
-    if( isset($_GET['requestid']) ){
-        $requestid = $_GET['requestid'];
+    if( isset($_POST['requestid']) ){
+        $requestid = $_POST['requestid'];
     }
-    if( isset($_GET['transid']) ){
-      $transid = $_GET['transid'];
+    if( isset($_POST['transid']) ){
+      $transid = $_POST['transid'];
     } 
 ?>
 
@@ -40,9 +40,7 @@
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
-<script>
-  sessionStorage.setItem('requestid_global', <?php echo "'".$requestid."'"; ?> );
-</script>
+
 
 </head>
 <body>
@@ -290,7 +288,7 @@
             <h2 class="text-primary d-flex align-items-center m-0"><span class="text-3 text-dark mr-1">Monto de recarga: </span><?php echo "$". $monto_fomato; ?></h2>
           </div>
           <div class="col-md-6">
-            <p class="text-md-right pb-0 mb-0">Transaction ID: <span class="text-body">25246584</span></p>
+            <p class="text-md-right pb-0 mb-0">Transaction ID: <span class="text-body"><?php echo $transid; ?></span></p>
           </div>
         </div>
         <hr class="m-0">
@@ -308,29 +306,21 @@
                       <!-- START FORM PAYMENT -->
                     
                       <form id="purchase-card-PurchaseCard-form" action="callbackPayment.php" method="post">
-                        <!--
-                        <h2>Merchant Login</h2>
-                        <label for="merchant_id" class="required">Merchant Id <span class="required">*</span></label> <br/>
-                        <input class="form-control" name="merchant_id" id="merchant_id" type="text" value="sandbox" /><br/>
-
-                        <label for="password" class="required">Password <span class="required">*</span></label><br/>
-                        <input class="form-control" name="password" id="password" type="text" value="RZIuVE3NySIP9fQ" /><br/>
-                        -->
                         <h2>Card Information</h2>
                         <label for="first_name" class="required">First Name <span class="required">*</span></label><br/>
-                        <input class="form-control" name="first_name" id="first_name" type="text" value="Michael" /><br/>
+                        <input class="form-control" name="first_name" id="first_name" type="text" value="Michael" required/><br/>
 
                         <label for="last_name" class="required">Last Name <span class="required">*</span></label><br/>
-                        <input class="form-control" name="last_name" id="last_name" type="text" value="Winslow" /><br/>
+                        <input class="form-control" name="last_name" id="last_name" type="text" value="Winslow" required/><br/>
 
                         <label for="card_number" class="required">Card Number <span class="required">*</span></label><br/>
-                        <input class="form-control" name="card_number" id="card_number" type="text" value="4597723679422665" /><br/>
+                        <input class="form-control" name="card_number" id="card_number" type="text" value="4597723679422665" required/><br/>
 
-                        <label for="expiry_date_month" class="required">Expiration Date <span class="required">*</span></label><br/>
+                        <label for="expiry_date_month" class="required">Expiration Date <span class="required" required>*</span></label><br/>
                         <div class="container">
                           <div class="row">
                             <div class="col-sm">
-                              <select class="form-control" name="expiry_date_month" id="expiry_date_month">
+                              <select class="form-control" name="expiry_date_month" id="expiry_date_month" required>
                                 <option value="">-choose month-</option>
                                 <option value="01">(01) January</option>
                                 <option value="02">(02) February</option>
@@ -347,7 +337,7 @@
                               </select>
                             </div>
                             <div class="col-sm">
-                              <select class="form-control" name="expiry_date_year" id="expiry_date_year">
+                              <select class="form-control" name="expiry_date_year" id="expiry_date_year" required>
                                 <option value="">-choose year-</option>
                                 <option value="23">2023</option>
                                 <option value="24" selected="selected">2024</option>
@@ -376,15 +366,12 @@
                         <br/>
 
                         <label for="cv2" class="required">CVV/ CV2 <span class="required">*</span></label><br/>
-                        <input class="form-control" name="cv2" id="cv2" type="text" maxlength="4" value="123" />
+                        <input class="form-control" name="cv2" id="cv2" type="text" maxlength="4" value="123" required/>
                         
-                        <!--
-                        <label for="amount" class="required">Amount <span class="required">*</span></label><br/>
-                        -->
                         <input class="form-control" name="amount" id="amount" type="hidden" value= <?php echo '"' . str_replace(".","",$monto_fomato) . '"' ?> readonly/><br/>
 
                         <label for="currency_code" class="required">Currency Code <span class="required">*</span></label><br/>
-                        <select class="form-control" name="currency_code" id="currency_code">
+                        <select class="form-control" name="currency_code" id="currency_code" required>
                           <option value="AED">AED</option>
                           <option value="AFN">AFN</option>
                           <option value="ALL">ALL</option>
@@ -560,34 +547,25 @@
                           <option value="ZWL">ZWL</option>
                         </select>
                         <br/>
-
-                        <!--
-                        <h2>Contact Information</h2>
-                        <label for="email_address">Email Address</label><br/>
-                        <input name="email_address" id="email_address" type="text" value="michaeln@live.net" /><br/>
-
-                        <label for="phone_number">Phone</label><br/>
-                        <input name="phone_number" id="phone_number" type="text" value="815-244-3090" /><br/>
-                        -->
                         
                         <h2>Billing Address</h2>
                         <label for="address1" class="required">Address Line 1 <span class="required">*</span></label><br/>
-                        <input class="form-control" name="address1" id="address1" type="text" value="4926 Emeral Dreams Drive" /><br/>
+                        <input class="form-control" name="address1" id="address1" type="text" value="4926 Emeral Dreams Drive" required/><br/>
 
                         <label for="address2">Address Line 2</label><br/>
-                        <input class="form-control" name="address2" id="address2" type="text" /><br/>
+                        <input class="form-control" name="address2" id="address2" type="text"/><br/>
 
                         <label for="city" class="required">City <span class="required">*</span></label><br/>
-                        <input class="form-control" name="city" id="city" type="text" value="Mount Carroll" /><br/>
+                        <input class="form-control" name="city" id="city" type="text" value="Mount Carroll" required/><br/>
 
                         <label for="province" class="required">Province <span class="required">*</span></label><br/>
-                        <input class="form-control" name="province" id="province" type="text" value="IL" /><br/>
+                        <input class="form-control" name="province" id="province" type="text" value="IL" required/><br/>
 
                         <label for="postal_code" class="required">Postal Code <span class="required">*</span></label><br/>
-                        <input class="form-control" name="postal_code" id="postal_code" type="text" maxlength="10" value="61053" /><br/>
+                        <input class="form-control" name="postal_code" id="postal_code" type="text" maxlength="10" value="61053" required/><br/>
                         
                         <label for="country_code" class="required">Country <span class="required">*</span></label><br/>
-                        <select class="form-control" name="country_code" id="country_code"><br/>
+                        <select class="form-control" name="country_code" id="country_code" required><br/>
                           <option value="AF">Afghanistan</option>
                           <option value="AL">Albania</option>
                           <option value="DZ">Algeria</option>
@@ -834,23 +812,18 @@
                           <option value="ZW">Zimbabwe</option>
                         </select>
                         
-                        <h2>Order Information</h2> 
-                        <label for="trans_id" class="required">Trans Id <span class="required">*</span></label><br/>
-                        <input class="form-control" name="trans_id" id="trans_id" type="text" value=<?php echo '"' . $transid . '"'; ?> /><br/>
+                        <input class="form-control" name="trans_id" id="trans_id" type="hidden" value=<?php echo '"' . $transid . '"'; ?> required/><br/>
 
-                        <label for="customer_id" class="required">Customer Id <span class="required">*</span></label><br/>
-                        <input class="form-control" name="customer_id" id="customer_id" type="text" value="10" /><br/>
-
-                        <label for="customer_ip_address" class="required">Customer Ip <span class="required">*</span></label><br/>
-                        <input class="form-control" name="customer_ip_address" id="customer_ip_address" type="text" value="139.59.117.119" /><br/>
-                        
-                        <input name="requestid" id="requestid" type="hidden"  value= <?php echo '"' . $requestid . '"'; ?> />
+                        <input name="requestid" id="requestid" type="hidden"  value= <?php echo '"' . $requestid . '"'; ?> required/>
                         <br/>
 
                         <input class="btn btn-success" type="submit" value= "Pagar"><br/>
                       </form>
                       <?php echo 'Request ID: ' . $requestid; ?>
                      <!-- END FORM PAYMENT -->
+
+
+
                     </div>
                     <div class="col-lg-4 mt-lg-0 mt-4">
                       <p>Aceptamos todas las tarjetas</p>

@@ -2,10 +2,10 @@
 <html lang="en">
 
 <?php
-    $numero = $_GET['mobileNumber'];
-    $codigo = $_GET['codeRecharge'];
-    $monto = str_replace(".","",$_GET['amount']);
-    $monto_fomato = $_GET['amount'];
+    $numero = $_POST['mobileNumber'];
+    $codigo = $_POST['codeRecharge'];
+    $monto = str_replace(".","",$_POST['amount']);
+    $monto_fomato = $_POST['amount'];
 ?>
 
 <head>
@@ -15,7 +15,7 @@
     <title>Document</title>
 </head>
 <body onload= <?php echo '"ejecutarRecarga(\'' . $monto . '\',\''. $codigo .'\',\''. $numero .'\')"'; ?> >
-    <form id="formData" action="formPayment.php" metod="get">
+    <form id="formData" action="formPayment.php" metod="POST">
         <input type="hidden" id="numero" name="numero" value= <?php echo '"'.$numero.'"'; ?> ><br>
         <input type="hidden" id="codigo" name="codigo" value= <?php echo '"'.$codigo.'"'; ?>><br>
         <input type="hidden" id="monto" name="monto" value= <?php echo '"'.$monto.'"'; ?>> <br>
