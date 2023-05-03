@@ -1,25 +1,10 @@
+
+/******************************CONSTANTES**********************************/
 const cuenta = 'cuenta/4421001010';
 const usuario = 'usuario/jcervantes.test';
 const password = 'password/ws123456';
-const options = {
-    method: 'POST',
-    body: new URLSearchParams({cuenta: '4421001010', usuario: 'jcervantes.test', password: 'ws123456'})
-  };
-function optionsReservaTrasaccion (numero, producto) {
-    const optionNeReserva ={
-        method: 'POST',
-        body: new URLSearchParams({cuenta: '4421001010', usuario: 'jcervantes.test', password: 'ws123456',numero: numero, producto: producto})
-    }
-    return optionNeReserva;
-};
-function optionsprocesaTranssacion (requestid) {
-    const optionNeReserva ={
-        method: 'POST',
-        body: new URLSearchParams({cuenta: '4421001010', usuario: 'jcervantes.test', password: 'ws123456',requestid: requestid})
-    }
-    return optionNeReserva;
-};
-
+const btnVerPlanes = document.getElementById('btnVerPlanes');
+const btnVerPlanesp = document.getElementById('btnVerPlanesP');
 let requestid;
 const urlProducto = 'https://app.sivetel.com/ApiWS/obtenerProductos';
 const urlSalgo = 'https://app.sivetel.com/ApiWS/consultarSaldos';
@@ -29,11 +14,48 @@ const reservaRecargad = "https://app.sivetel.com/ApiWS/reservarTransaccion";
 const ejecutartranssaciond="https://app.sivetel.com/ApiWS/procesarTransaccion";
 const consultarTransaccion= "https://app.sivetel.com/Api/consultarTransaccion";
 
-async function obtenerProductos (){
+const options = {
+    method: 'POST',
+    body: new URLSearchParams({cuenta: '4421001010', usuario: 'jcervantes.test', password: 'ws123456'})
+  };
 
-    const respuesta = await fetch(urlProducto,options)
-    const datos = await respuesta.json()
-    
+/**FUNCIONES*********/
+function optionsReservaTrasaccion (numero, producto) {//**Funcion que crea las opciones para consumir el servicio de reservar una transacción en la api de recargas*/
+    const optionNeReserva ={
+        method: 'POST',
+        body: new URLSearchParams({cuenta: '4421001010', usuario: 'jcervantes.test', password: 'ws123456',numero: numero, producto: producto})
+    }
+    return optionNeReserva;
+};
+function optionsprocesaTranssacion (requestid) {//**funciones que crea las opciones para procesar la transacción de la api de recargas hay que enviarle el id de la reserva para que pueda funcionar */
+    const optionNeReserva ={
+        method: 'POST',
+        body: new URLSearchParams({cuenta: '4421001010', usuario: 'jcervantes.test', password: 'ws123456',requestid: requestid})
+    }
+    return optionNeReserva;
+};
+
+btnVerPlanesp.addEventListener('click', (event) => {/*Evento click para poder mostrar los datos de la api recarga con respecto a los planes que hay por compañia*/
+    const compañia = document.getElementById('operadora').value;
+    if(compañia != 'seleccione compañia'){
+        obtenerProductosFiltro(compañia);
+        event.preventDefault();
+    }
+    else {
+        event.preventDefault();
+        obtenerProductos();
+    }
+
+});
+btnVerPlanes.addEventListener('click', () => {/*Se obtienen los productos (planes de recargas una con el boton que esta dentro del *Mostrar planes*)*/
+	obtenerProductos();
+});
+
+async function obtenerProductos (){/*función que busca obtener los los productos de la api de recargas, ya consumida esta función por un evento click*/ 
+
+    const respuesta = await fetch(urlProducto,options)/*se consume la api*/
+    const datos = await respuesta.json()// se obtiene los productos
+    /**se procesan los productos */
     let productos = '';
     await datos.data.forEach(producto => {
         productos += `
@@ -48,9 +70,9 @@ async function obtenerProductos (){
     });
     document.getElementById('contenedor-planes').innerHTML = productos;
     const termino = true;
-    console.log(datos)
-    console.log(datos.status)
-    console.log(datos.data)
+    // console.log(datos)
+    // console.log(datos.status)
+    // console.log(datos.data)
     return termino;
 }
 async function obtenerProductosFiltro(operadora){
@@ -84,81 +106,40 @@ async function obtenerProductosFiltro(operadora){
 
 }
 
-async function consultarSaldos (){
+async function consultarSaldos (){/*con esta función se consumen una api para obtener los saldos*/ 
     const respuesta = await fetch(urlSalgo,options)
     const datos = await respuesta.json()
     console.log(datos)
 }
 
-// async function consultarServicios(){
-//     const respuesta = await fetch(urlServicios,options)
-//     const datos = await respuesta.json()
-//     console.log(datos)
-// }
-// async function consultarPines(){
-//     const respuesta = await fetch(urlPines,options)
-//     const datos = await respuesta.json()
-//     console.log(datos)
-// }
-async function reservaRecarga(number,producto){
+async function reservaRecarga(number,producto){//*importante funcion, el primer paso de la cadena de procesos*/
     const respuesta = await fetch(reservaRecargad,optionsReservaTrasaccion(number,producto))
     const datos = await respuesta.json()
     requestid = datos.data.requestid;
     return datos;
 }
-// async function ejecutartransaccionpostPago(requestid)
-// {
-//     const respuesta = await ejecutartranssacion(requestid)
-//     return respuesta;
-// }
+
 async function ejecutartranssacion(idreserva)
-{
+{ /*funcione para ejecutar la transacción*/
     const respuesta = await fetch(ejecutartranssaciond,optionsprocesaTranssacion(idreserva))
     const datos = await respuesta.json()
     return datos;
 }
-// async function consultarTransaccion(requestid)
-// {
-//     const respuesta = await fetch(consultarTransaccion,optionsprocesaTranssacion(requestid))
-//     const datos = await respuesta.json()
-//     return datos
+
+// function EjecutarDatos(codigo, monto){/*ejecutar monto de datos*/
+//     codCharge  = document.getElementById('codeRecharge');
+//     codMonto = document.getElementById('amount');
+    
+//     codMonto.value = monto;
+//     codCharge.value = codigo;
+//     console.log(monto);
+//     console.log(codigo);
+//     document.querySelector('#view-plans').setAttribute('style','display: none;');
+//     document.querySelector('.modal-backdrop').classList.remove('modal-backdrop','fade','show');
+
+
+    
 // }
-
-
-
-const btnVerPlanes = document.getElementById('btnVerPlanes');
-const btnVerPlanesp = document.getElementById('btnVerPlanesP');
-
-btnVerPlanesp.addEventListener('click', (event) => {
-    const compañia = document.getElementById('operadora').value;
-    if(compañia != 'seleccione compañia'){
-        obtenerProductosFiltro(compañia);
-        event.preventDefault();
-    }
-    else {
-        event.preventDefault();
-        obtenerProductos();
-    }
-
-});
-btnVerPlanes.addEventListener('click', () => {
-	obtenerProductos();
-});
-function EjecutarDatos(codigo, monto){
-    console.log("Hola desde datos")
-    codCharge  = document.getElementById('codeRecharge');
-    codMonto = document.getElementById('amount');
-    
-    codMonto.value = monto;
-    codCharge.value = codigo;
-    console.log(monto);
-    console.log(codigo);
-    document.querySelector('#view-plans').setAttribute('style','display: none;');
-    document.querySelector('.modal-backdrop').classList.remove('modal-backdrop','fade','show');
-
-
-    
-}
 async function ejecutarRecarga(monto = 0 , codigo = 0){
     console.log('Moneto:',monto);
     console.log('Codigo:',codigo);
