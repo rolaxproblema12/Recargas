@@ -101,6 +101,7 @@ async function consultarSaldos (){
 //     console.log(datos)
 // }
 async function reservaRecarga(number,producto){
+    console.log("Hola1")
     const respuesta = await fetch(reservaRecargad,optionsReservaTrasaccion(number,producto))
     const datos = await respuesta.json()
     requestid = datos.data.requestid;
@@ -113,6 +114,7 @@ async function reservaRecarga(number,producto){
 // }
 async function ejecutartranssacion(idreserva)
 {
+    console.log("Hola2")
     const respuesta = await fetch(ejecutartranssaciond,optionsprocesaTranssacion(idreserva))
     const datos = await respuesta.json()
     return datos;
@@ -130,6 +132,7 @@ const btnVerPlanes = document.getElementById('btnVerPlanes');
 const btnVerPlanesp = document.getElementById('btnVerPlanesP');
 
 btnVerPlanesp.addEventListener('click', (event) => {
+    console.log("Hola3");
     const compañia = document.getElementById('operadora').value;
     if(compañia != 'seleccione compañia'){
         obtenerProductosFiltro(compañia);
@@ -144,24 +147,33 @@ btnVerPlanesp.addEventListener('click', (event) => {
 btnVerPlanes.addEventListener('click', () => {
 	obtenerProductos();
 });
+function validarCampos() {
+    codMonto = document.getElementById('amount');
+    codCharge  = document.getElementById('codeRecharge');
+    
+    if(codMonto.value == " " && codCharge.value == " ")
+    {
+        alert("Ingresa el monto de tu recarga");
+    }
+    else{
+        alert("procesando recarga");
+    }
+}
 function EjecutarDatos(codigo, monto){
     console.log("Hola desde datos")
     codCharge  = document.getElementById('codeRecharge');
     codMonto = document.getElementById('amount');
-    
     codMonto.value = monto;
     codCharge.value = codigo;
     console.log(monto);
     console.log(codigo);
     document.querySelector('#view-plans').setAttribute('style','display: none;');
     document.querySelector('.modal-backdrop').classList.remove('modal-backdrop','fade','show');
-
-
-    
 }
 async function ejecutarRecarga(monto = 0 , codigo = 0){
     console.log('Moneto:',monto);
     console.log('Codigo:',codigo);
+    console.log("Hola")
     const resultado= await reservaRecarga(numero,codigo);
     console.log(resultado)
     //requestid
