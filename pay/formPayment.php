@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php
+    //Form reservarTransaccion.php
     if( isset($_GET['monto']) ){
         $monto = $_GET['monto'];
     }
@@ -10,12 +11,6 @@
     if( isset($_GET['requestid']) ){
         $requestid = $_GET['requestid'];
     }
-    if( isset($_GET['merchantRef']) ){
-      $merchantRef = $_GET['merchantRef'];
-    }
-    if( isset($_GET['signature']) ){
-      $signature = $_GET['signature'];
-    } 
     if( isset($_GET['transid']) ){
       $transid = $_GET['transid'];
     } 

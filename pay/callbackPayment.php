@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <?php
+    //Credenciales de Comerciante
     $merchant_id = "sandbox";
     $password = "RZIuVE3NySIP9fQ";
+    //Recupera datos de formPayment.php
     $first_name = $_POST["first_name"];
     $last_name = $_POST["last_name"];
     $card_number = $_POST["card_number"];
@@ -50,32 +52,19 @@
     $response = curl_exec($ch);
     curl_close($ch);
     
+
     if($response == false){
         echo("Error :(");
     }
     else{
         $data = json_decode($response);
-        $text = utf8_decode($response);
-        //echo($text);
-
-        /*
-        echo "<br/>";
-        echo "<br/>";
-        echo "<br/>";
-        */
+        //Recupera el codigo status del pago con tarjeta
         if (isset($data->status_code)) {
-            $valor = $data->status_code;
-            /*
-            echo("status: " . $valor);
-            echo "<br/>";
-            */
+            $codigo_status = $data->status_code;
         }
+        //Recupera mensaje del status del pago con tarjeta
         if (isset($data->message)) {
-            $valor2 = $data->message;
-            /*
-            echo("message: " . $valor2);
-            echo "<br/>";
-            */
+            $mensaje = $data->message;
         }
     }
 ?>
@@ -109,8 +98,8 @@
 >
 
     <form id="form-codigos" action="finish.php">
-        <input type="hidden" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $valor. '"' ?> /> <br>
-        <input type="hidden" name="messagePago" id="messagePago" value=<?php echo '"'. $valor2. '"' ?> /> <br>
+        <input type="hidden" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $codigo_status. '"' ?> /> <br>
+        <input type="hidden" name="messagePago" id="messagePago" value=<?php echo '"'. $mensaje. '"' ?> /> <br>
         <input type="hidden" name="ResponseCodeTransaccion" id="ResponseCodeTransaccion" value=""/> <br>
         <!-- <button type="submit">Go</button> -->
     </form>
