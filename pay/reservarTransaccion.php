@@ -2,10 +2,16 @@
 <html lang="en">
 
 <?php
-    $numero = $_POST['mobileNumber'];
-    $codigo = $_POST['codeRecharge'];
-    $monto = str_replace(".","",$_POST['amount']);
-    $monto_fomato = $_POST['amount'];
+    if( isset($_POST['mobileNumber']) && isset($_POST['codeRecharge']) && isset($_POST['amount'])){
+        $numero = $_POST['mobileNumber'];
+        $codigo = $_POST['codeRecharge'];
+        $monto = str_replace(".","",$_POST['amount']);
+        $monto_fomato = $_POST['amount'];
+    }
+    else{
+        header('Location: ../index.html');
+        exit;
+    }
 ?>
 
 <head>
@@ -15,14 +21,13 @@
     <title>Document</title>
 </head>
 <body onload= <?php echo '"ejecutarRecarga(\'' . $monto . '\',\''. $codigo .'\',\''. $numero .'\')"'; ?> >
-    <form id="formData" action="formPayment.php" metod="post">
-        <input type="text" id="numero" name="numero" value= <?php echo '"'.$numero.'"'; ?> ><br>
-        <input type="text" id="codigo" name="codigo" value= <?php echo '"'.$codigo.'"'; ?>><br>
-        <input type="text" id="monto" name="monto" value= <?php echo '"'.$monto.'"'; ?>> <br>
-        <input type="text" id="monto_fomato" name="monto_fomato" value= <?php echo '"'.$monto_fomato.'"'; ?>> <br>
-        <input type="text" id="requestid" name="requestid" value=""><br>
-        <input type="text" id="transid" name="transid" value=""><br>
-        <input type="submit" value="GO"><br>
+    <form method="post" id="formData" action="formPayment.php" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" id="numero" name="numero" value= <?php echo '"'.$numero.'"'; ?> ><br>
+        <input type="hidden" id="codigo" name="codigo" value= <?php echo '"'.$codigo.'"'; ?>><br>
+        <input type="hidden" id="monto" name="monto" value= <?php echo '"'.$monto.'"'; ?>> <br>
+        <input type="hidden" id="monto_fomato" name="monto_fomato" value= <?php echo '"'.$monto_fomato.'"'; ?>> <br>
+        <input type="hidden" id="requestid" name="requestid" value=""><br>
+        <input type="hidden" id="transid" name="transid" value=""><br>
     </form>
     <script src="../js/reservaTr.js"></script>
 </body>

@@ -49,10 +49,8 @@ async function ejecutarRecarga(monto, codigo,numero){
     document.getElementById("requestid").value = requestidd;
     console.log('se inserto requestid');
     console.log('adios...');
-    /*
     let formulario = document.getElementById('formData');
     formulario.submit();
-    */
 }
 
 function generarIdtransaction(){

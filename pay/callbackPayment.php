@@ -3,71 +3,93 @@
     //Credenciales de Comerciante
     $merchant_id = "sandbox";
     $password = "RZIuVE3NySIP9fQ";
-    //Recupera datos de formPayment.php
-    $first_name = $_POST["first_name"];
-    $last_name = $_POST["last_name"];
-    $card_number = $_POST["card_number"];
-    $expiry_date_month = $_POST["expiry_date_month"];
-    $expiry_date_year = $_POST["expiry_date_year"];
-    $cv2 = $_POST["cv2"];
-    $amount = $_POST["amount"];
-    $currency_code = $_POST["currency_code"];
-    $address1 = $_POST["address1"];
-    $address2 = $_POST["address2"];
-    $city = $_POST["city"];
-    $province = $_POST["province"];
-    $postal_code = $_POST["postal_code"];
-    $country_code = $_POST["country_code"];
-    $trans_id = $_POST["trans_id"];
-
-
-    $customer_id = "10";
-    $customer_ip_address = "139.59.117.119"; 
-    $requestid = $_POST["requestid"]; 
-
-    //Consume API
-    $data = array(  'merchant_id' => $merchant_id, 
-                    'password' => $password, 
-                    'first_name' => $first_name, 
-                    'last_name' => $last_name, 
-                    'card_number' => $card_number, 
-                    'expiry_date_month' => $expiry_date_month, 
-                    'expiry_date_year' => $expiry_date_year, 
-                    'cv2' => $cv2, 
-                    'amount' => $amount, 
-                    'currency_code' => $currency_code, 
-                    'address1' => $address1, 
-                    'address2' => $address2, 
-                    'city' => $city, 
-                    'province' => $province, 
-                    'postal_code' => $postal_code, 
-                    'country_code' => $country_code, 
-                    'trans_id' => $trans_id, 
-                    'customer_id' => $customer_id, 
-                    'customer_ip_address' => $customer_ip_address 
-                );
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://api.peak-pay.com/purchase');
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $response = curl_exec($ch);
-    curl_close($ch);
+    if(
+        isset($_POST["first_name"]) && 
+        isset($_POST["last_name"]) &&
+        isset($_POST["card_number"]) &&
+        isset($_POST["expiry_date_month"]) &&
+        isset($_POST["expiry_date_year"]) &&
+        isset($_POST["cv2"]) &&
+        isset($_POST["amount"]) &&
+        isset($_POST["currency_code"]) &&
+        isset($_POST["address1"]) &&
+        isset($_POST["city"]) &&
+        isset($_POST["province"]) &&
+        isset($_POST["postal_code"]) &&
+        isset($_POST["country_code"]) &&
+        isset($_POST["trans_id"])
+    ){
+        //Recupera datos de formPayment.php
+        $first_name = $_POST["first_name"];
+        $last_name = $_POST["last_name"];
+        $card_number = $_POST["card_number"];
+        $expiry_date_month = $_POST["expiry_date_month"];
+        $expiry_date_year = $_POST["expiry_date_year"];
+        $cv2 = $_POST["cv2"];
+        $amount = $_POST["amount"];
+        $currency_code = $_POST["currency_code"];
+        $address1 = $_POST["address1"];
+        //$address2 = $_POST["address2"];
+        $city = $_POST["city"];
+        $province = $_POST["province"];
+        $postal_code = $_POST["postal_code"];
+        $country_code = $_POST["country_code"];
+        $trans_id = $_POST["trans_id"];
     
-
-    if($response == false){
-        echo("Error :(");
+    
+        $customer_id = "10";
+        $customer_ip_address = "139.59.117.119"; 
+        $requestid = $_POST["requestid"]; 
+    
+        //Consume API
+        $data = array(  'merchant_id' => $merchant_id, 
+                        'password' => $password, 
+                        'first_name' => $first_name, 
+                        'last_name' => $last_name, 
+                        'card_number' => $card_number, 
+                        'expiry_date_month' => $expiry_date_month, 
+                        'expiry_date_year' => $expiry_date_year, 
+                        'cv2' => $cv2, 
+                        'amount' => $amount, 
+                        'currency_code' => $currency_code, 
+                        'address1' => $address1, 
+                        //'address2' => $address2, 
+                        'city' => $city, 
+                        'province' => $province, 
+                        'postal_code' => $postal_code, 
+                        'country_code' => $country_code, 
+                        'trans_id' => $trans_id, 
+                        'customer_id' => $customer_id, 
+                        'customer_ip_address' => $customer_ip_address 
+                    );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://api.peak-pay.com/purchase');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+    
+        if($response == false){
+            header('Location: ../index.html');
+            exit;
+        }
+        else{
+            $data = json_decode($response);
+            //Recupera el codigo status del pago con tarjeta
+            if (isset($data->status_code)) {
+                $codigo_status = $data->status_code;
+            }
+            //Recupera mensaje del status del pago con tarjeta
+            if (isset($data->message)) {
+                $mensaje = $data->message;
+            }
+        }
     }
     else{
-        $data = json_decode($response);
-        //Recupera el codigo status del pago con tarjeta
-        if (isset($data->status_code)) {
-            $codigo_status = $data->status_code;
-        }
-        //Recupera mensaje del status del pago con tarjeta
-        if (isset($data->message)) {
-            $mensaje = $data->message;
-        }
+        header('Location: ../index.html');
+        exit;
     }
 ?>
 <html lang="es">
@@ -104,7 +126,7 @@
     ?>
 >
 
-    <form id="form-codigos" action="finish.php">
+    <form method="post" id="form-codigos" action="finish.php" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $codigo_status. '"' ?> /> <br>
         <input type="hidden" name="messagePago" id="messagePago" value=<?php echo '"'. $mensaje. '"' ?> /> <br>
         <input type="hidden" name="ResponseCodeTransaccion" id="ResponseCodeTransaccion" value=""/> <br>

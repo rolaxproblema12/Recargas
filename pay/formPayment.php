@@ -2,18 +2,16 @@
 
 <?php
     //Form reservarTransaccion.php
-    if( isset($_POST['monto']) ){
+    if( isset($_POST['monto']) && isset($_POST['monto_fomato']) && isset($_POST['requestid']) && isset($_POST['transid'])){
         $monto = $_POST['monto'];
-    }
-    if( isset($_POST['monto_fomato']) ){
-      $monto_fomato = $_POST['monto_fomato'];
-    }
-    if( isset($_POST['requestid']) ){
+        $monto_fomato = $_POST['monto_fomato'];
         $requestid = $_POST['requestid'];
+        $transid = $_POST['transid'];
     }
-    if( isset($_POST['transid']) ){
-      $transid = $_POST['transid'];
-    } 
+    else{
+      header('Location: ../index.html');
+      exit;
+    }
 ?>
 
 <html lang="en">

@@ -1,8 +1,8 @@
 <html lang="en">
 <?php
-    $codigoPago = $_GET["ResponseCodePago"];
-    $codigoTransaccion = $_GET["ResponseCodeTransaccion"];
-    $message = $_GET["messagePago"];
+    $codigoPago = $_POST["ResponseCodePago"];
+    $codigoTransaccion = $_POST["ResponseCodeTransaccion"];
+    $message = $_POST["messagePago"];
 ?>
 <head>
 <meta charset="UTF-8" />
