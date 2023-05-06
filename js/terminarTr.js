@@ -26,6 +26,10 @@ async function ejecutartranssacion(idreserva)
     console.log(datos.error);
     document.getElementById("ResponseCodeTransaccion").value = datos.error
 
+    sessionStorage.setItem('success', datos.status);
+    sessionStorage.setItem('error', datos.error);
+    sessionStorage.setItem('message', datos.message);
+
     let formulario = document.getElementById('form-codigos');
     formulario.submit();
 }

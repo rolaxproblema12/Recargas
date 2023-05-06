@@ -1,8 +1,14 @@
 <html lang="en">
 <?php
-    $codigoPago = $_POST["ResponseCodePago"];
-    $codigoTransaccion = $_POST["ResponseCodeTransaccion"];
-    $message = $_POST["messagePago"];
+    if(isset($_POST["ResponseCodePago"]) && isset($_POST["ResponseCodeTransaccion"]) && isset($_POST["messagePago"])){
+      $codigoPago = $_POST["ResponseCodePago"];
+      $codigoTransaccion = $_POST["ResponseCodeTransaccion"];
+      $message = $_POST["messagePago"];
+    }
+    else{
+      header('Location: ../index.html');
+      exit;
+    }
 ?>
 <head>
 <meta charset="UTF-8" />
@@ -509,7 +515,15 @@
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../vendor/owl.carousel/owl.carousel.min.js"></script> 
-<script src="../js/theme.js"></script> 
+<script src="../js/theme.js"></script>
+
+<script>
+  console.log('Numero: ' + sessionStorage.getItem('numero'));
+  console.log('Codigo: ' + sessionStorage.getItem('producto'));
+  console.log('Success: ' + sessionStorage.getItem('success'));
+  console.log('Error: ' + sessionStorage.getItem('error'));
+  console.log('Message: ' + sessionStorage.getItem('message'));
+</script>
 
 </body>
 </html>

@@ -38,6 +38,11 @@ async function ejecutarRecarga(monto, codigo,numero){
     console.log('Moneto:',monto);
     console.log('Codigo:',codigo);
     console.log('numero:',numero);
+
+    sessionStorage.setItem('numero', numero);
+    sessionStorage.setItem('producto', codigo);
+    
+
     const resultado= await reservaRecarga(numero,codigo);
     console.log(resultado)
     //Trans id
