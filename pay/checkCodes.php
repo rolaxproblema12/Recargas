@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+
     <?php
         session_start();
         if(isset($_POST["ResponseCodePago"]) && isset($_POST["ResponseCodeTransaccion"]) && isset($_POST["messagePago"])){
@@ -87,7 +88,6 @@
                 $_SESSION['codigoRecarga'] = 'NA';
 
                 header('Location: finish.php');
-                exit;
             }
         }
         else{
@@ -95,5 +95,6 @@
             exit;
         }
     ?>
-</body>
+
+    </body>
 </html>
