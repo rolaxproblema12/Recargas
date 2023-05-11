@@ -59,6 +59,10 @@
                             echo "mensaje reembolzo: " . $refund_mensaje . "<br>";
                         }
                         echo "reembolzo terminado<br>";
+
+                        $_SESSION['codigoPago'] = $codigoPago;
+                        $_SESSION['mensaje'] = $message;
+                        $_SESSION['codigoRecarga'] = $codigoTransaccion;
                     }
                 }
                 else{//sino -> finaliza el proceso
@@ -75,6 +79,7 @@
                 echo "Pago no realizado con exito<br\>";
                 $_SESSION['codigoPago'] = $codigoPago;
                 $_SESSION['mensaje'] = $message;
+                $_SESSION['codigoRecarga'] = 'NA';
             }
         }
         else{
