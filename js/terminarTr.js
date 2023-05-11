@@ -22,11 +22,17 @@ async function ejecutartranssacion(idreserva)
     const respuesta = await fetch(ejecutartranssaciond,optionsprocesaTranssacion(idreserva))
     const datos = await respuesta.json()
     
-    console.log(datos);
-    console.log(datos.error);
     document.getElementById("ResponseCodeTransaccion").value = datos.error
-    //return datos;
-    //sumit al formulario
+
+    sessionStorage.setItem('success', datos.status);
+    sessionStorage.setItem('error', datos.error);
+    sessionStorage.setItem('message', datos.message);
+
+    let formulario = document.getElementById('form-codigos');
+    formulario.submit();
+}
+
+function terminarProceso(){
     let formulario = document.getElementById('form-codigos');
     formulario.submit();
 }

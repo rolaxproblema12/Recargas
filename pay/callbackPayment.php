@@ -1,17 +1,98 @@
 <!DOCTYPE html>
 <?php
-    $TransactionID = $_POST["TransactionID"];
-    $MerchantRef = $_POST["MerchantRef"];
-    $TransTypeID = $_POST["TransTypeID"];
-    $Currency = $_POST["Currency"];
-    $Amount = $_POST["Amount"];
-    $BusinessCase = $_POST["BusinessCase"];
-    $Descriptor = $_POST["Descriptor"];
-    $Bank = $_POST["Bank"];
-    $ResponseCode = $_POST["ResponseCode"];
-    $ResponseDescription = $_POST["ResponseDescription"];
-    $BankCode = $_POST["BankCode"];
-    $BankDescription = $_POST["BankDescription"];
+    session_start();
+    //Credenciales de Comerciante
+    $merchant_id = "sandbox";
+    $password = "RZIuVE3NySIP9fQ";
+    if(
+        isset($_POST["first_name"]) && 
+        isset($_POST["last_name"]) &&
+        isset($_POST["card_number"]) &&
+        isset($_POST["expiry_date_month"]) &&
+        isset($_POST["expiry_date_year"]) &&
+        isset($_POST["cv2"]) &&
+        isset($_POST["amount"]) &&
+        isset($_POST["currency_code"]) &&
+        isset($_POST["address1"]) &&
+        isset($_POST["city"]) &&
+        isset($_POST["province"]) &&
+        isset($_POST["postal_code"]) &&
+        isset($_POST["country_code"]) &&
+        isset($_POST["trans_id"])
+    ){
+        //Recupera datos de formPayment.php
+        $first_name = $_POST["first_name"];
+        $last_name = $_POST["last_name"];
+        $card_number = $_POST["card_number"];
+        $expiry_date_month = $_POST["expiry_date_month"];
+        $expiry_date_year = $_POST["expiry_date_year"];
+        $cv2 = $_POST["cv2"];
+        $amount = $_POST["amount"];
+        $currency_code = $_POST["currency_code"];
+        $address1 = $_POST["address1"];
+        //$address2 = $_POST["address2"];
+        $city = $_POST["city"];
+        $province = $_POST["province"];
+        $postal_code = $_POST["postal_code"];
+        $country_code = $_POST["country_code"];
+        $trans_id = $_POST["trans_id"];
+    
+        $_SESSION['trans_id'] = $trans_id;
+    
+        $customer_id = "10";
+        $customer_ip_address = "139.59.117.119"; 
+        $requestid = $_POST["requestid"]; 
+    
+        //Consume API
+        $data = array(  'merchant_id' => $merchant_id, 
+                        'password' => $password, 
+                        'first_name' => $first_name, 
+                        'last_name' => $last_name, 
+                        'card_number' => $card_number, 
+                        'expiry_date_month' => $expiry_date_month, 
+                        'expiry_date_year' => $expiry_date_year, 
+                        'cv2' => $cv2, 
+                        'amount' => $amount, 
+                        'currency_code' => $currency_code, 
+                        'address1' => $address1, 
+                        //'address2' => $address2, 
+                        'city' => $city, 
+                        'province' => $province, 
+                        'postal_code' => $postal_code, 
+                        'country_code' => $country_code, 
+                        'trans_id' => $trans_id, 
+                        'customer_id' => $customer_id, 
+                        'customer_ip_address' => $customer_ip_address 
+                    );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://api.peak-pay.com/purchase');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+    
+        if($response == false){
+            header('Location: ../index.html');
+            exit;
+        }
+        else{
+            $data = json_decode($response);
+            //Recupera el codigo status del pago con tarjeta
+            if (isset($data->status_code)) {
+                $codigo_status = $data->status_code;
+            }
+            //Recupera mensaje del status del pago con tarjeta
+            if (isset($data->message)) {
+                $mensaje = $data->message;
+            }
+        }
+    }
+    else{
+        header('Location: ../index.html');
+        exit;
+    }
 ?>
 <html lang="es">
 <head>
@@ -36,25 +117,22 @@
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 </head>
-<body onload="ejecutartranssacion(sessionStorage.getItem('requestid_global'))">
-    <form method="post" action="https://test.dg-gw.co.uk/orion/tester/TestReturn.aspx" id="form1"> 
-        <input type="hidden" name="TransactionID" id="TransactionID" value=<?php echo '"'.$TransactionID.'"'; ?>/> <br>
-        <input type="hidden" name="MerchantRef" id="MerchantRef" value=<?php echo '"'.$MerchantRef.'"'; ?> /> <br>
-        <input type="hidden" name="TransTypeID" id="TransTypeID" value=<?php echo '"'.$TransTypeID.'"'; ?>/> <br>
-        <input type="hidden" name="Currency" id="Currency" value=<?php echo '"'.$Currency.'"'; ?>/> <br>
-        <input type="hidden" name="Amount" id="Amount" value=<?php echo '"'.$Amount.'"'; ?>/> <br>
-        <input type="hidden" name="BusinessCase" id="BusinessCase" value=<?php echo '"'.$BusinessCase.'"'; ?>/> <br>
-        <input type="hidden" name="Descriptor" id="Descriptor" value=<?php echo '"'.$Descriptor.'"'; ?>/> <br>
-        <input type="hidden" name="Bank" id="Bank" value=<?php echo '"'.$Bank.'"'; ?>/> <br> 
-        <input type="hidden" name="ResponseCode" id="ResponseCode" value=<?php echo '"'.$ResponseCode.'"'; ?>/> <br>
-        <input type="hidden" name="ResponseDescription" id="ResponseDescription" value=<?php echo '"'.$ResponseDescription.'"'; ?>/> <br>
-        <input type="hidden" name="BankCode" id="BankCode" value=<?php echo '"'.$BankCode.'"'; ?>/> <br>
-        <input type="hidden" name="BankDescription" id="BankDescription" value=<?php echo '"'.$BankDescription.'"'; ?>/> <br>
-    </form> 
-    <form id="form-codigos" action="finish.php">
-        <input type="hidden" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $ResponseCode. '"' ?> /> <br>
+<body 
+    <?php
+        //$codigo_status -> status del pago con tarjeta
+        if($codigo_status == "0" || $codigo_status == "1"){
+            echo 'onload=\'ejecutartranssacion("' . $requestid . '")\'';
+        }
+        else{
+            echo "onload=terminarProceso()";
+        }
+    ?>
+>
+
+    <form method="post" id="form-codigos" action="checkCodes.php" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $codigo_status. '"' ?> /> <br>
+        <input type="hidden" name="messagePago" id="messagePago" value=<?php echo '"'. $mensaje. '"' ?> /> <br>
         <input type="hidden" name="ResponseCodeTransaccion" id="ResponseCodeTransaccion" value=""/> <br>
-        <!-- <button type="submit">Go</button> -->
     </form>
 
     <div class="center">  

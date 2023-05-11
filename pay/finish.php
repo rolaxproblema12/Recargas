@@ -1,7 +1,14 @@
 <html lang="en">
 <?php
-    $codigoPago = $_GET["ResponseCodePago"];
-    $codigoTransaccion = $_GET["ResponseCodeTransaccion"];
+    if(isset($_POST["ResponseCodePago"]) && isset($_POST["ResponseCodeTransaccion"]) && isset($_POST["messagePago"])){
+      $codigoPago = $_POST["ResponseCodePago"];
+      $codigoTransaccion = $_POST["ResponseCodeTransaccion"];
+      $message = $_POST["messagePago"];
+    }
+    else{
+      header('Location: ../index.html');
+      exit;
+    }
 ?>
 <head>
 <meta charset="UTF-8" />
@@ -282,34 +289,24 @@
                     <div class="col-lg-8">
 
                     <?php
+                        //Muestra los codigos
                         echo "Codigo Pago: " . $codigoPago . "<br>";
-                        echo "Codigo Transaccion: " . $codigoTransaccion . "<br>";
-
-
-                        if(($codigoPago == "0"&& $codigoPago == "1") && $codigoTransaccion == "0"){
-                            echo '
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Recarga exitosa!</strong> Tu recarga ha sido realizada con exito.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            ';
+                        if($codigoTransaccion == ""){
+                          echo "Codigo Transaccion: *Transaccion de recarga no realizada<br\>";
                         }
                         else{
-                            echo '
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Ha ocurrido un error!</strong> No se ha podido completar tu recarga.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            ';
+                          echo "Codigo Transaccion: " . $codigoTransaccion . "<br>";
+                        }
+
+                        //Verifica si se realizo el cobro con tarjeta
+                        if($codigoPago == "0" || $codigoPago == "1"){//se realizo el pago
+                         
+                        }
+                        else{//no se realizo el pago
+
                         }
                     ?>
-
                     
-
                     </div>
                     <div class="col-lg-4 mt-lg-0 mt-4">
                       <div class="card bg-light-3 p-3">
@@ -508,7 +505,15 @@
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../vendor/owl.carousel/owl.carousel.min.js"></script> 
-<script src="../js/theme.js"></script> 
+<script src="../js/theme.js"></script>
+
+<script>
+  console.log('Numero: ' + sessionStorage.getItem('numero'));
+  console.log('Codigo: ' + sessionStorage.getItem('producto'));
+  console.log('Success: ' + sessionStorage.getItem('success'));
+  console.log('Error: ' + sessionStorage.getItem('error'));
+  console.log('Message: ' + sessionStorage.getItem('message'));
+</script>
 
 </body>
 </html>
