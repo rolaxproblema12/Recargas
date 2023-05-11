@@ -306,7 +306,7 @@
 
                         }
                     ?>
-                    
+
                     </div>
                     <div class="col-lg-4 mt-lg-0 mt-4">
                       <div class="card bg-light-3 p-3">
@@ -513,6 +513,8 @@
   console.log('Success: ' + sessionStorage.getItem('success'));
   console.log('Error: ' + sessionStorage.getItem('error'));
   console.log('Message: ' + sessionStorage.getItem('message'));
+
+  
 </script>
 
 </body>

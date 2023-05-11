@@ -60,9 +60,11 @@
                         }
                         echo "reembolzo terminado<br>";
 
-                        $_SESSION['codigoPago'] = $codigoPago;
-                        $_SESSION['mensaje'] = $message;
-                        $_SESSION['codigoRecarga'] = $codigoTransaccion;
+                        $_SESSION['codigoReenvolzo'] = $refund_codigo_status;
+                        $_SESSION['mensajeReenvolzo'] = $refund_mensaje;
+
+                        header('Location: finish.php');
+                        exit;
                     }
                 }
                 else{//sino -> finaliza el proceso
@@ -70,6 +72,9 @@
                     $_SESSION['codigoPago'] = $codigoPago;
                     $_SESSION['mensaje'] = $message;
                     $_SESSION['codigoRecarga'] = $codigoTransaccion;
+
+                    header('Location: finish.php');
+                    exit;
                 }
             }
             else{//no se realizo el pago
@@ -80,6 +85,9 @@
                 $_SESSION['codigoPago'] = $codigoPago;
                 $_SESSION['mensaje'] = $message;
                 $_SESSION['codigoRecarga'] = 'NA';
+
+                header('Location: finish.php');
+                exit;
             }
         }
         else{
@@ -87,6 +95,5 @@
             exit;
         }
     ?>
-    
 </body>
 </html>
