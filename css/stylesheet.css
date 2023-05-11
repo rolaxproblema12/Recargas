@@ -2737,3 +2737,8 @@ select.form-control:not([size]):not([multiple]):not(.form-control-sm) {
 .ui-widget-header {
   background: #fd423d;
 }
+.checkCodesPay{
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
