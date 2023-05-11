@@ -16,12 +16,12 @@
             //Verifica si se realizo el cobro con tarjeta
             if($codigoPago == "0" || $codigoPago == "1"){//se realizo el pago
                 //verifica el codigo de la transaccion (RECARGA)
-                echo "Pago realizado con exito <br>";
+                echo "<p class = 'checkCodesPay'>Pago realizado con exito <p>";
 
                 if($codigoTransaccion != 0){//si el codigo de transaccion es diferente de 0 (no se realizo la recarga correctamente)
-                    echo "Recarga no exitosa, ejecuta reembolzo <br>";
+                    echo "<p class = 'checkCodesPay'> Recarga no exitosa, ejecuta reembolzo <p>";
                     $transid =  $_SESSION['trans_id'];
-                    echo "transid: " . $transid . '<br>';
+                    echo "<p class = 'checkCodesPay'> transid: " . $transid . '<p>';
                     //realiza un reembolzo
                     //Credenciales de Comerciante
                     $merchant_id = "sandbox";
@@ -52,14 +52,14 @@
                         //Recupera el codigo status del reenvolzo
                         if (isset($data->status_code)) {
                             $refund_codigo_status = $data->status_code;
-                            echo "Codigo status reembolzo: " . $refund_codigo_status . "<br>";
+                            echo "<p class = 'checkCodesPay'> Codigo status reembolzo: " . $refund_codigo_status . "<p>";
                         }
                         //Recupera mensaje del status del reenvolzo
                         if (isset($data->message)) {
                             $refund_mensaje = $data->message;
-                            echo "mensaje reembolzo: " . $refund_mensaje . "<br>";
+                            echo "<p class = 'checkCodesPay'> mensaje reembolzo: " . $refund_mensaje . "<p>";
                         }
-                        echo "reembolzo terminado<br>";
+                        echo "<p class = 'checkCodesPay'> reembolzo terminado<p>";
 
                         $_SESSION['codigoReenvolzo'] = $refund_codigo_status;
                         $_SESSION['mensajeReenvolzo'] = $refund_mensaje;
@@ -69,7 +69,7 @@
                     }
                 }
                 else{//sino -> finaliza el proceso
-                    echo "Recarga exitosa <br>";
+                    echo "<p class = 'checkCodesPay'> Recarga exitosa <p>";
                     $_SESSION['codigoPago'] = $codigoPago;
                     $_SESSION['mensaje'] = $message;
                     $_SESSION['codigoRecarga'] = $codigoTransaccion;
@@ -82,7 +82,7 @@
                 //Si el pago no se realizo correctamente, (cualquier valor de codigo diferente de 0 o 1)
                 //no se realiza el proceso "Procesar Transaccion", se recibe una cadena vacia para el codigo de transaccion mandando unicamente el codigo de pago
                 //Esto se ve en el archivo callbackPaymen.php
-                echo "Pago no realizado con exito<br\>";
+                echo "<p class = 'checkCodesPay'> Pago no realizado con exito<p\>";
                 $_SESSION['codigoPago'] = $codigoPago;
                 $_SESSION['mensaje'] = $message;
                 $_SESSION['codigoRecarga'] = 'NA';
