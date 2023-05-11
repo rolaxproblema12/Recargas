@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+    session_start();
     //Credenciales de Comerciante
     $merchant_id = "sandbox";
     $password = "RZIuVE3NySIP9fQ";
@@ -36,6 +37,7 @@
         $country_code = $_POST["country_code"];
         $trans_id = $_POST["trans_id"];
     
+        $_SESSION['trans_id'] = $trans_id;
     
         $customer_id = "10";
         $customer_ip_address = "139.59.117.119"; 
@@ -117,6 +119,7 @@
 </head>
 <body 
     <?php
+        //$codigo_status -> status del pago con tarjeta
         if($codigo_status == "0" || $codigo_status == "1"){
             echo 'onload=\'ejecutartranssacion("' . $requestid . '")\'';
         }
@@ -126,7 +129,7 @@
     ?>
 >
 
-    <form method="post" id="form-codigos" action="finish.php" enctype="application/x-www-form-urlencoded">
+    <form method="post" id="form-codigos" action="checkCodes.php" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="ResponseCodePago" id="ResponseCodePago" value=<?php echo '"'. $codigo_status. '"' ?> /> <br>
         <input type="hidden" name="messagePago" id="messagePago" value=<?php echo '"'. $mensaje. '"' ?> /> <br>
         <input type="hidden" name="ResponseCodeTransaccion" id="ResponseCodeTransaccion" value=""/> <br>
