@@ -79,6 +79,7 @@
         }
         else{
             $data = json_decode($response);
+            $_SESSION['RequestPago'] = utf8_decode($response);
             //Recupera el codigo status del pago con tarjeta
             if (isset($data->status_code)) {
                 $codigo_status = $data->status_code;

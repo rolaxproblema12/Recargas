@@ -1,14 +1,47 @@
 <html lang="en">
 <?php
-    if(isset($_POST["ResponseCodePago"]) && isset($_POST["ResponseCodeTransaccion"]) && isset($_POST["messagePago"])){
-      $codigoPago = $_POST["ResponseCodePago"];
-      $codigoTransaccion = $_POST["ResponseCodeTransaccion"];
-      $message = $_POST["messagePago"];
+  session_start();
+  $tipo = -1;
+  $mensajeFinal = "";
+  //Verifica si hay datos
+  if(isset($_SESSION['codigoPago']) && isset($_SESSION['mensaje']) && $_SESSION['codigoRecarga']){
+    $codigoPago         = $_SESSION['codigoPago'];
+    $message            = $_SESSION['mensaje'];
+    $codigoTransaccion  = $_SESSION['codigoRecarga'];
+
+    if($_SESSION['codigoRecarga'] == "NA"){//No se realizo el pago, por lo tanto no se termino la recarga
+      $tipo = 1;
+      $mensajeFinal = "Ha ocurrido un error al intentar realizar el pago";
     }
     else{
-      header('Location: ../index.html');
-      exit;
+      $tipo = 0;
+      $mensajeFinal = "Recarga exitosa";
     }
+  }
+  if(isset($_SESSION['sinRespuesta'])){
+    $tipo = 1;
+    $mensajeFinal = "Ah ocurrido un error al realizar la recarga, intentelo mas tarde";
+  }
+  if(isset($_SESSION['codigoReenvolzo']) && isset($_SESSION['mensajeReenvolzo'])){
+    if($_SESSION['codigoReenvolzo'] == "0"){
+      $tipo = 0;
+      $mensajeFinal = "Ah ocurrido un error al realizar la recarga, se ha hecho el reembozo con exito";
+    }
+    else{
+      $tipo = 1;
+      $mensajeFinal = "Ah ocurrido un error al realizar la recarga, no se ha podido realizar el reenbolzo";
+    }
+  }
+  $reqPago = "";
+  $reqReem = "";
+
+  if(isset($_SESSION['RequestPago'])){
+    $reqPago = $_SESSION['RequestPago'];
+  }
+  if(isset($_SESSION['RequestReembolzo'])){
+    $reqReem = $_SESSION['RequestReembolzo'];
+  }
+  session_destroy();
 ?>
 <head>
 <meta charset="UTF-8" />
@@ -289,22 +322,28 @@
                     <div class="col-lg-8">
 
                     <?php
-                        //Muestra los codigos
-                        echo "Codigo Pago: " . $codigoPago . "<br>";
-                        if($codigoTransaccion == ""){
-                          echo "Codigo Transaccion: *Transaccion de recarga no realizada<br\>";
+                      /*
+                      echo 'Codigo Pago: ' . $codigoPago . '<br>';
+                      echo 'Codigo Recarga: ' . $codigoTransaccion . '<br>';
+                      */
+                      if($tipo == 0){
+                        echo '
+                        <div class="alert alert-success" role="alert">'
+                          . $mensajeFinal .
+                        '</div><br>
+                        ';
+                      }
+                      else{
+                        if($tipo == 1){
+                          echo '
+                          <div class="alert alert-danger" role="alert">'
+                            . $mensajeFinal .
+                          '</div><br>
+                          ';
                         }
-                        else{
-                          echo "Codigo Transaccion: " . $codigoTransaccion . "<br>";
-                        }
-
-                        //Verifica si se realizo el cobro con tarjeta
-                        if($codigoPago == "0" || $codigoPago == "1"){//se realizo el pago
-                         
-                        }
-                        else{//no se realizo el pago
-
-                        }
+                      }
+                      echo 'Request pago: ' . $reqPago . '<br>';
+                      echo 'Request reembolzo: ' . $reqReem . '<br>';
                     ?>
 
                     </div>
@@ -514,7 +553,11 @@
   console.log('Error: ' + sessionStorage.getItem('error'));
   console.log('Message: ' + sessionStorage.getItem('message'));
 
-  
+  <?php
+    echo "console.log('Request Pago: ' + '" . $reqPago . "');";
+    echo "console.log('Request Reembolzo: ' + '" . $reqReem . "');";
+  ?>
+
 </script>
 
 </body>

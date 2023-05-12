@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
     </head>
     <body>
 
@@ -43,12 +44,15 @@
                     curl_close($ch);
                     
                     if($response == false){
-                        header('Location: ../index.html');
-                        exit;
+                        echo 'Sin respuesta del API';
+                        $_SESSION['sinRespuesta'] = '0';
+                        
+                        header('Location: finish.php');
                     }
                     else{
                         $data = json_decode($response);
                         echo utf8_decode($response) . "<br>";
+                        $_SESSION['RequestReembolzo'] = utf8_decode($response);
                         //Recupera el codigo status del reenvolzo
                         if (isset($data->status_code)) {
                             $refund_codigo_status = $data->status_code;
@@ -63,7 +67,7 @@
 
                         $_SESSION['codigoReenvolzo'] = $refund_codigo_status;
                         $_SESSION['mensajeReenvolzo'] = $refund_mensaje;
-
+                        
                         header('Location: finish.php');
                         exit;
                     }
@@ -73,7 +77,7 @@
                     $_SESSION['codigoPago'] = $codigoPago;
                     $_SESSION['mensaje'] = $message;
                     $_SESSION['codigoRecarga'] = $codigoTransaccion;
-
+                    
                     header('Location: finish.php');
                     exit;
                 }
@@ -83,11 +87,13 @@
                 //no se realiza el proceso "Procesar Transaccion", se recibe una cadena vacia para el codigo de transaccion mandando unicamente el codigo de pago
                 //Esto se ve en el archivo callbackPaymen.php
                 echo "<p class = 'checkCodesPay'> Pago no realizado con exito<p\>";
+                
                 $_SESSION['codigoPago'] = $codigoPago;
                 $_SESSION['mensaje'] = $message;
-                $_SESSION['codigoRecarga'] = 'NA';
-
+                $_SESSION['codigoRecarga'] = "NA";
+                
                 header('Location: finish.php');
+                exit;
             }
         }
         else{

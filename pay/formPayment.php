@@ -1028,7 +1028,13 @@
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../vendor/owl.carousel/owl.carousel.min.js"></script> 
 <script src="../js/theme.js"></script> 
-
+<script>
+    var object = {};
+    var formData = new FormData(document.getElementById("purchase-card-PurchaseCard-form"));
+    formData.forEach((value, key) => object[key] = value);
+    var json = JSON.stringify(object);
+    console.log(json);
+</script>
 
 </body>
 </html>
